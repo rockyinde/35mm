@@ -83,7 +83,6 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 		return toYouTubeVideoList(searchResultList);
 	}
 
-
 	/**
 	 * Converts {@link List} of {@link Video} to {@link List} of {@link YouTubeVideo}.
 	 *
@@ -95,13 +94,18 @@ public class GetFeaturedVideos extends GetYouTubeVideos {
 
 		if (videoList != null) {
 			for (Video video : videoList) {
+
+				YouTubeVideo youTubeVideo = new YouTubeVideo(video);
+
+				if (youTubeVideo.isRestricted())
+					continue;
+
 				youTubeVideoList.add(new YouTubeVideo(video));
 			}
 		}
 
 		return youTubeVideoList;
 	}
-
 
 	private String getPreferredRegion() {
 		String region = SkyTubeApp.getPreferenceManager()

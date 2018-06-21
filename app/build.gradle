@@ -5,7 +5,7 @@ android {
     buildToolsVersion '27.0.3'
 
     defaultConfig {
-        applicationId "free.rm.skytube"
+        applicationId "cleantube.brownbagguide.info"
         minSdkVersion 14
         targetSdkVersion 27
 
@@ -13,15 +13,15 @@ android {
         versionCode 13
 
         // Third party devs:  pls be ethical and change the below keys
-        buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyDU-ZZCyOB_kYkiMSZ6ooSipUZRukHU4ik"'
+        buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4"'
         buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
                 '{' +
-                        '"AIzaSyC27jgPDHkQsQK8TW4ngrQprSCnlMTJ04w",' +
-                        '"AIzaSyCmXsaE6ZW14-1vM5zceWnGWnB73FkY7U4",' +
-                        '"AIzaSyBd3Loyy_XN2tPHPfc1E7EkSkdCqfzTHxg"'  +
+                        '"AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4",' +
+                        '"AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4",' +
+                        '"AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4"'  +
                 '}'
-        buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://skytube-app.com"'
-        buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://skytube-app.com/credits.html"'
+        buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://brownbagguide.info/"'
+        buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://brownbagguide.info/"'
         buildConfigField 'String', 'SKYTUBE_UPDATES_URL', '"https://api.github.com/repos/ram-on/SkyTube/releases/latest"'
         vectorDrawables.useSupportLibrary true
         multiDexEnabled true    // as we have over 65536 lines of code...
@@ -32,19 +32,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    flavorDimensions "skytube"
+    flavorDimensions "cleantube"
     productFlavors {
         // 100% Open-Source Edition
         oss {
-            applicationId "free.rm.skytube.oss"
-            resValue "string", "app_name", "SkyTube"
-            dimension "skytube"
+            applicationId "cleantube.brownbagguide.info.oss"
+            resValue "string", "app_name", "CleanTube"
+            dimension "cleantube"
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
-            applicationId "free.rm.skytube.extra"
-            resValue "string", "app_name", "SkyTube Extra"
-            dimension "skytube"
+            applicationId "cleantube.brownbagguide.info.extra"
+            resValue "string", "app_name", "CleanTube"
+            dimension "cleantube"
         }
     }
     // Generate APK filenames as follows:  <App Name>-<Flavor><Version>

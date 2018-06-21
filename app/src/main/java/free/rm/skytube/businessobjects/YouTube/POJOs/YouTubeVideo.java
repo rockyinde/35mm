@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -55,6 +56,7 @@ import free.rm.skytube.businessobjects.YouTube.VideoStream.StreamMetaData;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
+import free.rm.skytube.businessobjects.utilities.CleanTubeConstants;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
 import static free.rm.skytube.app.SkyTubeApp.getStr;
@@ -132,6 +134,15 @@ public class YouTubeVideo implements Serializable {
 	 */
 	private boolean isLiveStream;
 
+    public boolean isRestricted() {
+        return isRestricted;
+    }
+
+    /**
+	 * is the video restricted category
+	 */
+	private boolean isRestricted = false;
+
 
 
 	public YouTubeVideo(Video video) {
@@ -179,6 +190,39 @@ public class YouTubeVideo implements Serializable {
 
 			if (dislikeCount != null)
 				this.dislikeCount = String.format(Locale.getDefault(), "%,d", video.getStatistics().getDislikeCount());
+		}
+
+		// compute whether restricted video
+		computeIsRestricted();
+	}
+
+	/**
+	 * checks whether this video falls in the restricted category
+	 */
+	private void computeIsRestricted() {
+
+		// keywords
+		if (title == null)
+			return;
+
+		String titleLower = title.toLowerCase();
+
+		if (description != null)
+			titleLower += description.toLowerCase();
+
+		for (String word : CleanTubeConstants.RESTRICTED_KEYWORDS) {
+			if (titleLower.contains(word)) {
+				isRestricted = true;
+				break;
+			}
+		}
+
+		// percentage dislike
+		if (thumbsUpPercentage < 80)
+			isRestricted = true;
+
+		if (isRestricted) {
+			Log.i("restricted", "found video title: "+title);
 		}
 	}
 
