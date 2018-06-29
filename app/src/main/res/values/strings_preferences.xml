@@ -446,7 +446,6 @@
 		<item>@string/most_popular</item>
 		<item>@string/feed</item>
 		<item>@string/bookmarks</item>
-		<item>@string/downloads</item>
 	</string-array>
 	<string-array name="default_tab_values" translatable="false">
 		<item>0</item>

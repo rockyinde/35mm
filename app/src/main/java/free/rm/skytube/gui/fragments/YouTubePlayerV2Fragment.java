@@ -402,13 +402,13 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
-		// Hide the download video option if mobile downloads are not allowed and the device is connected through mobile, and the video isn't already downloaded
-		boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_allow_mobile_downloads), false);
-		if((youTubeVideo != null && !youTubeVideo.isDownloaded()) && (SkyTubeApp.isConnectedToWiFi() || (SkyTubeApp.isConnectedToMobile() && allowDownloadsOnMobile))) {
-			menu.findItem(R.id.download_video).setVisible(true);
-		} else {
-			menu.findItem(R.id.download_video).setVisible(false);
-		}
+//		// Hide the download video option if mobile downloads are not allowed and the device is connected through mobile, and the video isn't already downloaded
+//		boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_allow_mobile_downloads), false);
+//		if((youTubeVideo != null && !youTubeVideo.isDownloaded()) && (SkyTubeApp.isConnectedToWiFi() || (SkyTubeApp.isConnectedToMobile() && allowDownloadsOnMobile))) {
+//			menu.findItem(R.id.download_video).setVisible(true);
+//		} else {
+//			menu.findItem(R.id.download_video).setVisible(false);
+//		}
 	}
 
 
@@ -461,9 +461,9 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 				startActivity(i);
 				return true;
 
-			case R.id.download_video:
-				youTubeVideo.downloadVideo(getContext());
-				return true;
+//			case R.id.download_video:
+//				youTubeVideo.downloadVideo(getContext());
+//				return true;
 
 			case R.id.block_channel:
 				youTubeChannel.blockChannel();
@@ -899,5 +899,11 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false)) {
 			PlaybackStatusDb.getVideoDownloadsDb().setVideoPosition(youTubeVideo, player.getCurrentPosition());
 		}
+	}
+
+	public void pause () {
+
+		player.setPlayWhenReady(false);
+		player.getPlaybackState();
 	}
 }

@@ -222,7 +222,7 @@ public class MainFragment extends FragmentEx {
 			videoGridFragmentsList.add(mostPopularVideosFragment);
 			videoGridFragmentsList.add(subscriptionsFeedFragment);
 			videoGridFragmentsList.add(bookmarksFragment);
-			videoGridFragmentsList.add(downloadedVideosFragment);
+//			videoGridFragmentsList.add(downloadedVideosFragment);
 		}
 
 		@Override
@@ -252,8 +252,8 @@ public class MainFragment extends FragmentEx {
 			getChildFragmentManager().putFragment(outState, SUBSCRIPTIONS_FEED_FRAGMENT, subscriptionsFeedFragment);
 		if(bookmarksFragment != null && bookmarksFragment.isAdded())
 			getChildFragmentManager().putFragment(outState, BOOKMARKS_FRAGMENT, bookmarksFragment);
-		if(downloadedVideosFragment != null && downloadedVideosFragment.isAdded())
-			getChildFragmentManager().putFragment(outState, DOWNLOADED_VIDEOS_FRAGMENT, downloadedVideosFragment);
+//		if(downloadedVideosFragment != null && downloadedVideosFragment.isAdded())
+//			getChildFragmentManager().putFragment(outState, DOWNLOADED_VIDEOS_FRAGMENT, downloadedVideosFragment);
 
 		super.onSaveInstanceState(outState);
 	}

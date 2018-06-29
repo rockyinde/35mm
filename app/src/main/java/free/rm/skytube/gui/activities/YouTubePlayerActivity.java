@@ -107,6 +107,14 @@ public class YouTubePlayerActivity extends BackButtonActivity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 	}
 
+	@Override
+	protected void onPause() {
+
+		super.onPause();
+		if (videoPlayerFragment instanceof YouTubePlayerV2Fragment) {
+			((YouTubePlayerV2Fragment) videoPlayerFragment).pause();
+		}
+	}
 
 	@Override
 	public void onPanelClosed(int featureId, Menu menu) {

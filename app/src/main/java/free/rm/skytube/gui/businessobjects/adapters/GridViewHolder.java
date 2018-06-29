@@ -194,17 +194,17 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 			popupMenu.getMenu().findItem(R.id.mark_unwatched).setVisible(false);
 		}
 
-		if(youTubeVideo.isDownloaded()) {
-			popupMenu.getMenu().findItem(R.id.delete_download).setVisible(true);
-			popupMenu.getMenu().findItem(R.id.download_video).setVisible(false);
-		} else {
-			popupMenu.getMenu().findItem(R.id.delete_download).setVisible(false);
-			boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_allow_mobile_downloads), false);
-			if(SkyTubeApp.isConnectedToWiFi() || (SkyTubeApp.isConnectedToMobile() && allowDownloadsOnMobile))
-				popupMenu.getMenu().findItem(R.id.download_video).setVisible(true);
-			else
-				popupMenu.getMenu().findItem(R.id.download_video).setVisible(false);
-		}
+//		if(youTubeVideo.isDownloaded()) {
+//			popupMenu.getMenu().findItem(R.id.delete_download).setVisible(true);
+//			popupMenu.getMenu().findItem(R.id.download_video).setVisible(false);
+//		} else {
+//			popupMenu.getMenu().findItem(R.id.delete_download).setVisible(false);
+//			boolean allowDownloadsOnMobile = SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_allow_mobile_downloads), false);
+//			if(SkyTubeApp.isConnectedToWiFi() || (SkyTubeApp.isConnectedToMobile() && allowDownloadsOnMobile))
+//				popupMenu.getMenu().findItem(R.id.download_video).setVisible(true);
+//			else
+//				popupMenu.getMenu().findItem(R.id.download_video).setVisible(false);
+//		}
 		popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -238,12 +238,12 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 						i.putExtra(ThumbnailViewerActivity.YOUTUBE_VIDEO, youTubeVideo);
 						context.startActivity(i);
 						return true;
-					case R.id.delete_download:
-						youTubeVideo.removeDownload();
-						return true;
-					case R.id.download_video:
-						youTubeVideo.downloadVideo(context);
-						return true;
+//					case R.id.delete_download:
+//						youTubeVideo.removeDownload();
+//						return true;
+//					case R.id.download_video:
+//						youTubeVideo.downloadVideo(context);
+//						return true;
 					case R.id.block_channel:
 						youTubeVideo.getChannel().blockChannel();
 				}
