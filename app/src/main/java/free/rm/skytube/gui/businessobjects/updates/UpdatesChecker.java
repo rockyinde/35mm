@@ -75,7 +75,7 @@ public class UpdatesChecker {
 			}
 		}
 
-		return updatesAvailable;
+		return false;
 	}
 
 
