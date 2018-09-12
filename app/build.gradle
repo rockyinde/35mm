@@ -5,12 +5,12 @@ android {
     buildToolsVersion '27.0.3'
 
     defaultConfig {
-        applicationId "cleantube.brownbagguide.info"
+        applicationId "cleantube.v2.brownbagguide.info"
         minSdkVersion 14
         targetSdkVersion 27
 
-        versionName "2.85"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 16
+        versionName "1.00"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 1
 
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4"'
@@ -36,13 +36,13 @@ android {
     productFlavors {
         // 100% Open-Source Edition
         oss {
-            applicationId "cleantube.brownbagguide.info.oss"
+            applicationId "cleantube.v2.brownbagguide.info.oss"
             resValue "string", "app_name", "CleanTube"
             dimension "cleantube"
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
-            applicationId "cleantube.brownbagguide.info.extra"
+            applicationId "cleantube.v2.brownbagguide.info.extra"
             resValue "string", "app_name", "CleanTube"
             dimension "cleantube"
         }

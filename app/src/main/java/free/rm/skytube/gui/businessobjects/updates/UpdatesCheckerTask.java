@@ -55,28 +55,31 @@ public class UpdatesCheckerTask extends AsyncTaskParallel<Void, Void, UpdatesChe
 
 	@Override
 	protected void onPostExecute(final UpdatesChecker updatesChecker) {
+
+		return;
+		
 		// if there is an update available...
-		if (updatesChecker != null && updatesChecker.getLatestApkUrl() != null) {
-			// ask the user whether he wants to update or not
-			new AlertDialog.Builder(context)
-					.setTitle(R.string.update_available)
-					.setMessage( String.format(context.getString(R.string.update_dialog_msg), Float.toString(updatesChecker.getLatestApkVersion())) )
-					.setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							new UpgradeAppTask(updatesChecker.getLatestApkUrl(), context).executeInParallel();
-						}
-					})
-					.setNegativeButton(R.string.later, null)
-					.show();
-		} else if (displayUpToDateMessage) {
-			// inform the user that there is no update available (app is up-to-date)
-			new AlertDialog.Builder(context)
-					.setTitle(R.string.up_to_date)
-					.setMessage(R.string.up_to_date_msg)
-					.setNeutralButton(R.string.ok, null)
-					.show();
-		}
+//		if (updatesChecker != null && updatesChecker.getLatestApkUrl() != null) {
+//			// ask the user whether he wants to update or not
+//			new AlertDialog.Builder(context)
+//					.setTitle(R.string.update_available)
+//					.setMessage( String.format(context.getString(R.string.update_dialog_msg), Float.toString(updatesChecker.getLatestApkVersion())) )
+//					.setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
+//						@Override
+//						public void onClick(DialogInterface dialog, int which) {
+//							new UpgradeAppTask(updatesChecker.getLatestApkUrl(), context).executeInParallel();
+//						}
+//					})
+//					.setNegativeButton(R.string.later, null)
+//					.show();
+//		} else if (displayUpToDateMessage) {
+//			// inform the user that there is no update available (app is up-to-date)
+//			new AlertDialog.Builder(context)
+//					.setTitle(R.string.up_to_date)
+//					.setMessage(R.string.up_to_date_msg)
+//					.setNeutralButton(R.string.ok, null)
+//					.show();
+//		}
 	}
 
 }
