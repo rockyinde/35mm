@@ -56,7 +56,7 @@ import free.rm.skytube.businessobjects.db.SearchHistoryTable;
 import free.rm.skytube.businessobjects.interfaces.SearchHistoryClickListener;
 import free.rm.skytube.gui.businessobjects.BlockedVideosDialog;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
-import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import free.rm.skytube.gui.businessobjects.YouTubePlayerLauncher;
 import free.rm.skytube.gui.businessobjects.adapters.SearchHistoryCursorAdapter;
 import free.rm.skytube.gui.businessobjects.updates.UpdatesCheckerTask;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 					final String videoUrl = ((EditText)((AlertDialog) dialog).findViewById(R.id.dialog_url_edittext)).getText().toString();
 
 					// play the video
-					YouTubePlayer.launch(videoUrl, MainActivity.this);
+					YouTubePlayerLauncher.launch(videoUrl, MainActivity.this);
 				}
 			})
 			.setNegativeButton(R.string.cancel, null)

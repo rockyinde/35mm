@@ -126,7 +126,7 @@ public class BlockedVideosDialog extends SkyTubeMaterialDialog {
 				@Override
 				public void onClick(View v) {
 					// play the video
-					YouTubePlayer.launch(blockedVideo.getVideo(), context);
+					YouTubePlayerLauncher.launch(blockedVideo.getVideo(), context);
 				}
 			});
 

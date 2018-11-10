@@ -59,7 +59,7 @@ import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubePlaylist;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeChannelInfoTask;
 import free.rm.skytube.gui.activities.MainActivity;
 import free.rm.skytube.gui.businessobjects.PlaylistClickListener;
-import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import free.rm.skytube.gui.businessobjects.YouTubePlayerLauncher;
 import free.rm.skytube.gui.businessobjects.YouTubePlaylistListener;
 import free.rm.skytube.gui.fragments.ChannelBrowserFragment;
 import free.rm.skytube.gui.fragments.PlaylistVideosFragment;
@@ -263,7 +263,7 @@ public class SkyTubeApp extends MultiDexApplication {
 				final Matcher playlistMatcher = playlistPattern.matcher(clickedText);
 				final Matcher channelMatcher = channelPattern.matcher(clickedText);
 				if(videoPattern.matcher(clickedText).matches()) {
-					YouTubePlayer.launch(clickedText, context);
+					YouTubePlayerLauncher.launch(clickedText, context);
 				} else if(playlistMatcher.matches()) {
 					String playlistId = playlistMatcher.group(2);
 					// Retrieve the playlist from the playlist ID that was in the url the user clicked on

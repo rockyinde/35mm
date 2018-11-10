@@ -22,7 +22,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -30,15 +29,13 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
-import free.rm.skytube.gui.activities.YouTubePlayerActivity;
-import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
 
 /**
  * Launches YouTube player.
  */
-public class YouTubePlayer {
+public class YouTubePlayerLauncher {
 
-	private static final String TAG = YouTubePlayer.class.getSimpleName();
+	private static final String TAG = YouTubePlayerLauncher.class.getSimpleName();
 
 	/**
 	 * Launches the YouTube player so that the user can view the selected video.
@@ -46,13 +43,8 @@ public class YouTubePlayer {
 	 * @param youTubeVideo Video to be viewed.
 	 */
 	public static void launch(YouTubeVideo youTubeVideo, Context context) {
-		// if the user has selected to play the videos using the official YouTube player
-		// (in the preferences/settings) ...
-		if (useOfficialYouTubePlayer(context)) {
+
 			launchOfficialYouTubePlayer(youTubeVideo.getId(), context);
-		} else {
-			launchCustomYouTubePlayer(youTubeVideo, context);
-		}
 	}
 
 
@@ -62,13 +54,8 @@ public class YouTubePlayer {
 	 * @param videoUrl URL of the video to be watched.
 	 */
 	public static void launch(String videoUrl, Context context) {
-		// if the user has selected to play the videos using the official YouTube player
-		// (in the preferences/settings) ...
-		if (useOfficialYouTubePlayer(context)) {
+
 			launchOfficialYouTubePlayer(YouTubeVideo.getYouTubeIdFromUrl(videoUrl), context);
-		} else {
-			launchCustomYouTubePlayer(videoUrl, context);
-		}
 	}
 
 
@@ -108,29 +95,6 @@ public class YouTubePlayer {
 					.setNeutralButton(android.R.string.ok, null)
 					.show();
 		}
-	}
-
-
-	/**
-	 * Launches the custom-made YouTube player so that the user can view the selected video.
-	 *
-	 * @param youTubeVideo Video to be viewed.
-	 */
-	public static void launchCustomYouTubePlayer(YouTubeVideo youTubeVideo, Context context) {
-		Intent i = new Intent(context, YouTubePlayerActivity.class);
-		i.putExtra(YouTubePlayerFragment.YOUTUBE_VIDEO_OBJ, youTubeVideo);
-		context.startActivity(i);
-	}
-
-
-	/**
-	 * Launch the custom-made YouTube player.
-	 */
-	private static void launchCustomYouTubePlayer(String videoUrl, Context context) {
-		Intent i = new Intent(context, YouTubePlayerActivity.class);
-		i.setAction(Intent.ACTION_VIEW);
-		i.setData(Uri.parse(videoUrl));
-		context.startActivity(i);
 	}
 
 }

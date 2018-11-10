@@ -40,7 +40,7 @@ import free.rm.skytube.businessobjects.db.Tasks.IsVideoBookmarkedTask;
 import free.rm.skytube.businessobjects.db.Tasks.IsVideoWatchedTask;
 import free.rm.skytube.gui.activities.ThumbnailViewerActivity;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
-import free.rm.skytube.gui.businessobjects.YouTubePlayer;
+import free.rm.skytube.gui.businessobjects.YouTubePlayerLauncher;
 
 /**
  * A ViewHolder for the videos grid view.
@@ -91,7 +91,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 				if (youTubeVideo != null) {
 					if(gridViewHolderListener != null)
 						gridViewHolderListener.onClick();
-					YouTubePlayer.launch(youTubeVideo, context);
+					YouTubePlayerLauncher.launch(youTubeVideo, context);
 				}
 			}
 		});
