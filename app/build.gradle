@@ -9,8 +9,8 @@ android {
         minSdkVersion 14
         targetSdkVersion 27
 
-        versionName "1.00"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 1
+        versionName "1.02"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 3
 
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4"'
