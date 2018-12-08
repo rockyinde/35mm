@@ -1,0 +1,14 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "leanube-20181208205452-authRole",
+            "UnauthRoleArn": "arn:aws:iam::811560195498:role/leanube-20181208205452-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::811560195498:role/leanube-20181208205452-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "leanube-20181208205452-deployment",
+            "UnauthRoleName": "leanube-20181208205452-unauthRole",
+            "StackName": "leanube-20181208205452",
+            "StackId": "arn:aws:cloudformation:eu-west-1:811560195498:stack/leanube-20181208205452/6aaad2d0-fafd-11e8-89a3-0a4e84363f34"
+        }
+    }
+}
