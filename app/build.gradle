@@ -95,6 +95,18 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:multidex:1.0.3' // as we have over 65536 lines of code...
 
+    // util library
+
+    // rest client - retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+
+    // gson
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+
+    // lombok
+    compileOnly "org.projectlombok:lombok:1.18.4"
+    annotationProcessor 'org.projectlombok:lombok:1.18.4'
+
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
 }
