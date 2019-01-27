@@ -1,6 +1,9 @@
 package free.rm.skytube.rest.provider;
 
+import android.util.Log;
+
 import java.io.IOException;
+import java.time.Clock;
 import java.util.List;
 
 import free.rm.skytube.rest.entity.MMSFetchVideosResponse;
@@ -15,7 +18,7 @@ public class ServiceProvider {
 
     public static final SeventyMMService SEVENTY_MM_SERVICE =
             new Retrofit.Builder()
-            .baseUrl("http://mysfits-nlb-d54bc96e93537702.elb.eu-west-1.amazonaws.com")
+            .baseUrl("https://a7fdcsp3ak.execute-api.ap-south-1.amazonaws.com/prod/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(SeventyMMService.class);
@@ -25,10 +28,49 @@ public class ServiceProvider {
         return SEVENTY_MM_SERVICE;
     }
 
-    public static void main (String[] args) throws IOException {
+    public static void asyncSave (final String id, final String cat, final String body, final String title) {
 
-        Call<MMSFetchVideosResponse> call = SEVENTY_MM_SERVICE.fetchVideos("c");
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                // Do network action in this function
+                save(id, cat, body, title);
+            }
+        }).start();
+    }
 
+    public static SeventyMMVideo save (String id, String cat, String body, String title) {
+
+        SeventyMMVideo video = new SeventyMMVideo();
+        video.setId(id);
+        video.setCat(cat);
+        video.setBody(body);
+        video.setTitle(title);
+
+        Call<SeventyMMVideo> call = SEVENTY_MM_SERVICE.save(video);
+        try {
+
+            Response<SeventyMMVideo> response = call.execute();
+            Log.i("MMS", "save successful");
+            return response.body();
+        } catch (IOException e) {
+
+            Log.e("service", "error", e);
+            return null;
+        }
+    }
+
+    private static void testSave () throws IOException {
+
+
+        SeventyMMVideo resVideo = save("test", "test", "test", "test");
+
+        System.out.println(resVideo.getId());
+    }
+
+    private static void testFetch () throws IOException {
+
+        Call<MMSFetchVideosResponse> call = SEVENTY_MM_SERVICE.getVideos("c");
         Response<MMSFetchVideosResponse> response = call.execute();
 
         MMSFetchVideosResponse fetchVideosResponse = response.body();
@@ -39,5 +81,10 @@ public class ServiceProvider {
 
             System.out.println(video.getTitle());
         }
+    }
+
+    public static void main (String[] args) throws IOException {
+
+        testSave();
     }
 }
