@@ -36,6 +36,7 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.interfaces.OrderableDatabase;
+import free.rm.skytube.rest.provider.ServiceProvider;
 
 /**
  * A database (DB) that stores user's bookmarked videos.
@@ -93,15 +94,25 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	public boolean add(YouTubeVideo video) {
 		Gson gson = new Gson();
 		ContentValues values = new ContentValues();
-		values.put(BookmarksTable.COL_YOUTUBE_VIDEO_ID, video.getId());
-		values.put(BookmarksTable.COL_YOUTUBE_VIDEO, gson.toJson(video).getBytes());
 
+		String id = video.getId();
+		String cat = "new";
+		String body = gson.toJson(video);
+		String title = video.getTitle();
+
+		values.put(BookmarksTable.COL_YOUTUBE_VIDEO_ID, id);
+		values.put(BookmarksTable.COL_YOUTUBE_VIDEO, body.getBytes());
+
+		// add to DB
 		int order = getTotalBookmarks();
 		order++;
 		values.put(BookmarksTable.COL_ORDER, order);
 
 		boolean addSuccessful = getWritableDatabase().insert(BookmarksTable.TABLE_NAME, null, values) != -1;
 		onUpdated();
+
+		// add to cloud
+        ServiceProvider.asyncSave(id, cat, body, title);
 
 		return addSuccessful;
 	}

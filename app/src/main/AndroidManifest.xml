@@ -8,6 +8,12 @@
 	<!--<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/> -->     <!-- [Optional]  If enabled via the preferences, the app will periodically check for new videos published by the subscribed channels -->
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>       <!-- Used when user tried to download a video to check whether the user is using cellular network or WIFI -->
 
+	<!-- AWS SDK INTEGRATION - amplify -->
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
 	<application
 		android:name=".app.SkyTubeApp"
 		android:allowBackup="true"
@@ -64,7 +70,10 @@
 
 		<!--<service android:name=".businessobjects.FeedUpdaterService"/>-->
 
-		<!--<receiver-->
+        <!-- AWS SDK -->
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
+
+        <!--<receiver-->
 			<!--android:name=".businessobjects.FeedUpdaterSetupReceiver"-->
 			<!--android:enabled="true">-->
 			<!--<intent-filter>-->

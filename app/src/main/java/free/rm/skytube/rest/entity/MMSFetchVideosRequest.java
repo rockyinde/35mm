@@ -5,10 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SeventyMMVideo {
+public class MMSFetchVideosRequest {
 
-    private String id;
     private String cat;
-    private String body;
-    private String title;
 }

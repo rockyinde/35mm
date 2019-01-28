@@ -1,16 +1,17 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.amazonaws.appsync'
 
 android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
 
     defaultConfig {
-        applicationId "cleantube.v2.brownbagguide.info"
-        minSdkVersion 14
+        applicationId "t5mm.brownbagguide.info"
+        minSdkVersion 15
         targetSdkVersion 27
 
-        versionName "1.02"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 3
+        versionName "1.00"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 1
 
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4"'
@@ -32,19 +33,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    flavorDimensions "cleantube"
+    flavorDimensions "t5mm"
     productFlavors {
         // 100% Open-Source Edition
         oss {
-            applicationId "cleantube.v2.brownbagguide.info.oss"
-            resValue "string", "app_name", "CleanTube"
-            dimension "cleantube"
+            applicationId "t5mm.brownbagguide.info.oss"
+            resValue "string", "app_name", "35mm"
+            dimension "t5mm"
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
-            applicationId "cleantube.v2.brownbagguide.info.extra"
-            resValue "string", "app_name", "CleanTube"
-            dimension "cleantube"
+            applicationId "t5mm.brownbagguide.info.extra"
+            resValue "string", "app_name", "35mm"
+            dimension "t5mm"
         }
     }
     // Generate APK filenames as follows:  <App Name>-<Flavor><Version>
@@ -109,4 +110,12 @@ dependencies {
 
     // proprietary module
     extraImplementation files('libs/YouTubeAndroidPlayerApi.jar')
+
+    //****** AWS SDK ********//
+    //Base SDK
+    implementation 'com.amazonaws:aws-android-sdk-core:2.8.+'
+    //AppSync SDK
+    implementation 'com.amazonaws:aws-android-sdk-appsync:2.6.+'
+    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0'
+    implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
 }
