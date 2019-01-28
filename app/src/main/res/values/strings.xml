@@ -9,6 +9,10 @@
 		official YouTube player from Google. Make sure it is installed on your device.</string>
     <string name="LIVE">LIVE</string>
     <string name="recent">Recent</string>
+    <string name="hits">Hits</string>
+    <string name="comedy">Comedy</string>
+    <string name="past">Past</string>
+    <string name="old">Old</string>
     <string name="featured">Featured</string>
     <string name="most_popular">Most Popular</string>
     <string name="video">Video</string>

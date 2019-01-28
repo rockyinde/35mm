@@ -49,7 +49,11 @@ public enum VideoCategory {
 	/** Videos that have been downloaded */
 	DOWNLOADED_VIDEOS (8),
 
-	RECENT(9);
+	RECENT(9),
+    HITS(10),
+    COMEDY(11),
+    PAST(12),
+	OLD(13);
 
 
 
@@ -89,6 +93,14 @@ public enum VideoCategory {
 			return new GetDownloadedVideos();
 		else if (id == RECENT.id)
 			return new MMSCategoryVideoFetcher("r");
+        else if (id == HITS.id)
+            return new MMSCategoryVideoFetcher("h");
+        else if (id == COMEDY.id)
+            return new MMSCategoryVideoFetcher("c");
+        else if (id == PAST.id)
+            return new MMSCategoryVideoFetcher("p");
+        else if (id == OLD.id)
+            return new MMSCategoryVideoFetcher("o");
 
 		// this will notify the developer that he forgot to edit this method when a new type is added
 		throw new UnsupportedOperationException();
