@@ -26,6 +26,7 @@ import free.rm.skytube.businessobjects.YouTube.GetPlaylistVideos;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideoBySearch;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.db.Tasks.GetSubscriptionsVideosFromDb;
+import free.rm.skytube.mms.fragments.MMSCategoryVideoFetcher;
 
 /**
  * Represents a video category/group.
@@ -46,7 +47,11 @@ public enum VideoCategory {
 	/** Videos belonging to a playlist */
 	PLAYLIST_VIDEOS (7),
 	/** Videos that have been downloaded */
-	DOWNLOADED_VIDEOS (8);
+	DOWNLOADED_VIDEOS (8),
+
+	RECENT(9);
+
+
 
 	// *****************
 	// DON'T FORGET to update #createGetYouTubeVideos() methods...
@@ -82,6 +87,8 @@ public enum VideoCategory {
 			return new GetPlaylistVideos();
 		else if (id == DOWNLOADED_VIDEOS.id)
 			return new GetDownloadedVideos();
+		else if (id == RECENT.id)
+			return new MMSCategoryVideoFetcher("r");
 
 		// this will notify the developer that he forgot to edit this method when a new type is added
 		throw new UnsupportedOperationException();

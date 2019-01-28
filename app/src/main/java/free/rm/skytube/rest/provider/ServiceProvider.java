@@ -6,7 +6,11 @@ import java.io.IOException;
 import java.time.Clock;
 import java.util.List;
 
+import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.mms.utility.MMSEntityMapperUtility;
+import free.rm.skytube.rest.entity.MMSFetchVideosRequest;
 import free.rm.skytube.rest.entity.MMSFetchVideosResponse;
+import free.rm.skytube.rest.entity.MMSPageToken;
 import free.rm.skytube.rest.entity.SeventyMMVideo;
 import free.rm.skytube.rest.service.SeventyMMService;
 import retrofit2.Call;
@@ -37,6 +41,27 @@ public class ServiceProvider {
                 save(id, cat, body, title);
             }
         }).start();
+    }
+
+    public static MMSFetchVideosResponse fetchVideos (String cat, MMSPageToken pt) {
+
+        MMSFetchVideosRequest request = new MMSFetchVideosRequest();
+        request.setC(cat);
+        request.setPt(pt);
+
+        Call<MMSFetchVideosResponse> call = SEVENTY_MM_SERVICE.getVideos(request);
+
+        try {
+
+            Response<MMSFetchVideosResponse> response = call.execute();
+            Log.i("MMS", "fetch successful");
+
+            return response.body();
+        } catch (IOException e) {
+
+            Log.e("service", "error", e);
+            return null;
+        }
     }
 
     public static SeventyMMVideo save (String id, String cat, String body, String title) {
@@ -70,12 +95,16 @@ public class ServiceProvider {
 
     private static void testFetch () throws IOException {
 
-        Call<MMSFetchVideosResponse> call = SEVENTY_MM_SERVICE.getVideos("c");
+        MMSFetchVideosRequest request = new MMSFetchVideosRequest();
+        request.setPt(null);
+        request.setC("c");
+
+        Call<MMSFetchVideosResponse> call = SEVENTY_MM_SERVICE.getVideos(request);
         Response<MMSFetchVideosResponse> response = call.execute();
 
         MMSFetchVideosResponse fetchVideosResponse = response.body();
 
-        List<SeventyMMVideo> list = fetchVideosResponse.getVideos();
+        List<SeventyMMVideo> list = fetchVideosResponse.getItems();
 
         for (SeventyMMVideo video : list) {
 
@@ -85,6 +114,7 @@ public class ServiceProvider {
 
     public static void main (String[] args) throws IOException {
 
-        testSave();
+//        testSave();
+        testFetch();
     }
 }

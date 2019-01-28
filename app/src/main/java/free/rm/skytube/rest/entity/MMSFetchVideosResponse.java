@@ -9,5 +9,8 @@ import lombok.Setter;
 @Setter
 public class MMSFetchVideosResponse {
 
-    private List<SeventyMMVideo> videos;
+    private List<SeventyMMVideo> Items;
+    private int Count;
+    private int ScannedCount;
+    private MMSPageToken LastEvaluatedKey;
 }

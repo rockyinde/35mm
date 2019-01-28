@@ -8,6 +8,7 @@
 	<string name="launch_offical_player_error">An error has occurred while trying to launch the
 		official YouTube player from Google. Make sure it is installed on your device.</string>
     <string name="LIVE">LIVE</string>
+    <string name="recent">Recent</string>
     <string name="featured">Featured</string>
     <string name="most_popular">Most Popular</string>
     <string name="video">Video</string>

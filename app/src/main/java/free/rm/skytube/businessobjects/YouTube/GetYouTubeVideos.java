@@ -22,6 +22,7 @@ import java.util.List;
 
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
+import free.rm.skytube.rest.entity.MMSPageToken;
 
 /**
  * Returns a list of YouTube videos.
@@ -31,6 +32,7 @@ import free.rm.skytube.businessobjects.YouTube.Tasks.GetYouTubeVideosTask;
 public abstract class GetYouTubeVideos {
 	protected String nextPageToken = null;
 	protected boolean noMoreVideoPages = false;
+	protected MMSPageToken mmsPageToken = null;
 
 	/**
 	 * Initialise this object.

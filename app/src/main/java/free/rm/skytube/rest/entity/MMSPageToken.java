@@ -5,8 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MMSFetchVideosRequest {
+public class MMSPageToken {
 
-    private String c;   // cat
-    private MMSPageToken pt;
+    private String cat, id;
 }
