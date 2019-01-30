@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	private ChannelBrowserFragment  channelBrowserFragment;
 	/** Fragment that shows Videos from a specific Playlist */
 	private PlaylistVideosFragment  playlistVideosFragment;
-	private VideoBlockerPlugin      videoBlockerPlugin;
 
 	private boolean dontAddToBackStack = false;
 
@@ -144,13 +143,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 			}
 		}
 
-		if (savedInstanceState != null) {
-			// restore the video blocker plugin
-			this.videoBlockerPlugin = (VideoBlockerPlugin) savedInstanceState.getSerializable(VIDEO_BLOCKER_PLUGIN);
-			this.videoBlockerPlugin.setActivity(this);
-		} else {
-			this.videoBlockerPlugin = new VideoBlockerPlugin(this);
-		}
 	}
 
 
@@ -167,8 +159,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		if(playlistVideosFragment != null && playlistVideosFragment.isVisible())
 			getSupportFragmentManager().putFragment(outState, PLAYLIST_VIDEOS_FRAGMENT, playlistVideosFragment);
 
-		// save the video blocker plugin
-		outState.putSerializable(VIDEO_BLOCKER_PLUGIN, videoBlockerPlugin);
 	}
 
 
@@ -187,66 +177,63 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	public boolean onCreateOptionsMenu(final Menu menu) {
 		getMenuInflater().inflate(R.menu.main_activity_menu, menu);
 
-		// setup the video blocker notification icon which will be displayed in the tool bar
-		videoBlockerPlugin.setupIconForToolBar(menu);
-
-		// setup the SearchView (actionbar)
-		final MenuItem searchItem = menu.findItem(R.id.menu_search);
-		final SearchView searchView = (SearchView) searchItem.getActionView();
-
-		searchView.setQueryHint(getString(R.string.search_videos));
-
-		// set the query hints to be equal to the previously searched text
-		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-			@Override
-			public boolean onQueryTextChange(final String newText) {
-				// if the user does not want to have the search string saved, then skip the below...
-				if (SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_search_history), false)
-						||  newText == null  ||  newText.length() <= 1) {
-					return false;
-				}
-
-				SearchHistoryCursorAdapter searchHistoryCursorAdapter = (SearchHistoryCursorAdapter) searchView.getSuggestionsAdapter();
-				Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSearchCursor(newText);
-
-				// if the adapter has not been created, then create it
-				if (searchHistoryCursorAdapter == null) {
-					searchHistoryCursorAdapter = new SearchHistoryCursorAdapter(getBaseContext(),
-							R.layout.search_hint,
-							cursor,
-							new String[]{SearchHistoryTable.COL_SEARCH_TEXT},
-							new int[]{android.R.id.text1},
-							0);
-					searchHistoryCursorAdapter.setSearchHistoryClickListener(new SearchHistoryClickListener() {
-						@Override
-						public void onClick(String query) {
-							displaySearchResults(query);
-						}
-					});
-					searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
-				} else {
-					// else just change the cursor...
-					searchHistoryCursorAdapter.changeCursor(cursor);
-				}
-
-				return true;
-			}
-
-			@Override
-			public boolean onQueryTextSubmit(String query) {
-				// hide the keyboard
-				searchView.clearFocus();
-
-				if(!SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_search_history), false)) {
-					// Save this search string into the Search History Database (for Suggestions)
-					SearchHistoryDb.getSearchHistoryDb().insertSearchText(query);
-				}
-
-				displaySearchResults(query);
-
-				return true;
-			}
-		});
+//		// setup the SearchView (actionbar)
+//		final MenuItem searchItem = menu.findItem(R.id.menu_search);
+//		final SearchView searchView = (SearchView) searchItem.getActionView();
+//
+//		searchView.setQueryHint(getString(R.string.search_videos));
+//
+//		// set the query hints to be equal to the previously searched text
+//		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//			@Override
+//			public boolean onQueryTextChange(final String newText) {
+//				// if the user does not want to have the search string saved, then skip the below...
+//				if (SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_search_history), false)
+//						||  newText == null  ||  newText.length() <= 1) {
+//					return false;
+//				}
+//
+//				SearchHistoryCursorAdapter searchHistoryCursorAdapter = (SearchHistoryCursorAdapter) searchView.getSuggestionsAdapter();
+//				Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSearchCursor(newText);
+//
+//				// if the adapter has not been created, then create it
+//				if (searchHistoryCursorAdapter == null) {
+//					searchHistoryCursorAdapter = new SearchHistoryCursorAdapter(getBaseContext(),
+//							R.layout.search_hint,
+//							cursor,
+//							new String[]{SearchHistoryTable.COL_SEARCH_TEXT},
+//							new int[]{android.R.id.text1},
+//							0);
+//					searchHistoryCursorAdapter.setSearchHistoryClickListener(new SearchHistoryClickListener() {
+//						@Override
+//						public void onClick(String query) {
+//							displaySearchResults(query);
+//						}
+//					});
+//					searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
+//				} else {
+//					// else just change the cursor...
+//					searchHistoryCursorAdapter.changeCursor(cursor);
+//				}
+//
+//				return true;
+//			}
+//
+//			@Override
+//			public boolean onQueryTextSubmit(String query) {
+//				// hide the keyboard
+//				searchView.clearFocus();
+//
+//				if(!SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_search_history), false)) {
+//					// Save this search string into the Search History Database (for Suggestions)
+//					SearchHistoryDb.getSearchHistoryDb().insertSearchText(query);
+//				}
+//
+//				displaySearchResults(query);
+//
+//				return true;
+//			}
+//		});
 
 		return true;
 	}
@@ -255,16 +242,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.menu_blocker:
-				videoBlockerPlugin.onMenuBlockerIconClicked();
-				return true;
 			case R.id.menu_preferences:
 				Intent i = new Intent(this, PreferencesActivity.class);
 				startActivity(i);
 				return true;
-			case R.id.menu_enter_video_url:
-				displayEnterVideoUrlDialog();
-				return true;
+//			case R.id.menu_enter_video_url:
+//				displayEnterVideoUrlDialog();
+//				return true;
 			case android.R.id.home:
 				if(mainFragment == null || !mainFragment.isVisible()) {
 					onBackPressed();
@@ -416,88 +400,4 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		searchVideoGridFragment.setArguments(bundle);
 		switchToFragment(searchVideoGridFragment);
 	}
-
-
-
-	//////////////////////////////////////////////////////////////////////////////////////////
-
-
-	/**
-	 * A module/"plugin"/icon that displays the total number of blocked videos.
-	 */
-	private static class VideoBlockerPlugin implements VideoBlocker.VideoBlockerListener,
-			BlockedVideosDialog.BlockedVideosDialogListener,
-			Serializable {
-
-		private ArrayList<VideoBlocker.BlockedVideo> blockedVideos = new ArrayList<>();
-		private transient AppCompatActivity activity = null;
-
-
-		VideoBlockerPlugin(AppCompatActivity activity) {
-			// notify this class whenever a video is blocked...
-			VideoBlocker.setVideoBlockerListener(this);
-			this.activity = activity;
-		}
-
-
-		public void setActivity(AppCompatActivity activity) {
-			this.activity = activity;
-		}
-
-
-		@Override
-		public void onVideoBlocked(VideoBlocker.BlockedVideo blockedVideo) {
-			blockedVideos.add(blockedVideo);
-			activity.invalidateOptionsMenu();
-		}
-
-
-		/**
-		 * Setup the video blocker notification icon which will be displayed in the tool bar.
- 		 */
-		void setupIconForToolBar(final Menu menu) {
-			if (getTotalBlockedVideos() > 0) {
-				// display a red bubble containing the number of blocked videos
-				ActionItemBadge.update(activity,
-						menu.findItem(R.id.menu_blocker),
-						ContextCompat.getDrawable(activity, R.drawable.ic_video_blocker),
-						ActionItemBadge.BadgeStyles.RED,
-						getTotalBlockedVideos());
-			} else {
-				// Else, set the bubble to transparent.  This is required so that when the user
-				// clicks on the icon, the app will be able to detect such click and displays the
-				// BlockedVideosDialog (otherwise, the ActionItemBadge would just ignore such clicks.
-				ActionItemBadge.update(activity,
-						menu.findItem(R.id.menu_blocker),
-						ContextCompat.getDrawable(activity, R.drawable.ic_video_blocker),
-						new BadgeStyle(BadgeStyle.Style.DEFAULT, com.mikepenz.actionitembadge.library.R.layout.menu_action_item_badge, Color.TRANSPARENT, Color.TRANSPARENT, Color.WHITE),
-						"");
-			}
-		}
-
-
-		void onMenuBlockerIconClicked() {
-			new BlockedVideosDialog(activity, this, blockedVideos).show();
-		}
-
-
-		@Override
-		public void onClearBlockedVideos() {
-			blockedVideos.clear();
-			activity.invalidateOptionsMenu();
-		}
-
-
-		/**
-		 * @return Total number of blocked videos.
-		 */
-		private int getTotalBlockedVideos() {
-			return blockedVideos.size();
-		}
-
-	}
-
-
-
-
 }
