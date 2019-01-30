@@ -52,8 +52,8 @@ class PlaylistViewHolder extends RecyclerView.ViewHolder {
 	View videoDurationTextView;
 	@BindView(R.id.channel_text_view)
 	View channelTextView;
-	@BindView(R.id.options_button)
-	View optionsButton;
+//	@BindView(R.id.options_button)
+//	View optionsButton;
 
 	private PlaylistClickListener playlistClickListener;
 
@@ -65,7 +65,7 @@ class PlaylistViewHolder extends RecyclerView.ViewHolder {
 		thumbsUpView.setVisibility(View.GONE);
 		videoDurationTextView.setVisibility(View.GONE);
 		channelTextView.setVisibility(View.GONE);
-		optionsButton.setVisibility(View.GONE);
+//		optionsButton.setVisibility(View.GONE);
 
 		this.playlistClickListener = playlistClickListener;
 	}

@@ -100,7 +100,7 @@ public class MainFragment extends FragmentEx {
 		setSupportActionBar(toolbar);
 
 		// indicate that this fragment has an action bar menu
-		setHasOptionsMenu(true);
+//		setHasOptionsMenu(true);
 
 		subsDrawerLayout = view.findViewById(R.id.subs_drawer_layout);
 		subsDrawerToggle = new ActionBarDrawerToggle(
@@ -109,7 +109,7 @@ public class MainFragment extends FragmentEx {
 						R.string.app_name,
 						R.string.app_name
 		);
-		subsDrawerToggle.setDrawerIndicatorEnabled(true);
+//		subsDrawerToggle.setDrawerIndicatorEnabled(true);
 		final ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(true);
