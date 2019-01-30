@@ -116,16 +116,16 @@ public class MainFragment extends FragmentEx {
 			actionBar.setHomeButtonEnabled(true);
 		}
 
-		subsListView = view.findViewById(R.id.subs_drawer);
-		if (subsAdapter == null) {
-			subsAdapter = SubsAdapter.get(getActivity(), view.findViewById(R.id.subs_drawer_progress_bar));
-		} else {
-			subsAdapter.setContext(getActivity());
-		}
-		subsAdapter.setListener((MainActivityListener)getActivity());
-
-		subsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
-		subsListView.setAdapter(subsAdapter);
+//		subsListView = view.findViewById(R.id.subs_drawer);
+//		if (subsAdapter == null) {
+//			subsAdapter = SubsAdapter.get(getActivity(), view.findViewById(R.id.subs_drawer_progress_bar));
+//		} else {
+//			subsAdapter.setContext(getActivity());
+//		}
+//		subsAdapter.setListener((MainActivityListener)getActivity());
+//
+//		subsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//		subsListView.setAdapter(subsAdapter);
 
 		videosPagerAdapter = new VideosPagerAdapter(getChildFragmentManager());
 		viewPager = view.findViewById(R.id.pager);
