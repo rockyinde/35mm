@@ -4,6 +4,9 @@ import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoListResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import free.rm.skytube.businessobjects.Logger;
@@ -44,6 +47,10 @@ public class MMSCategoryVideoFetcher extends GetYouTubeVideos {
                 noMoreVideoPages = true;
 
             searchResultList = MMSEntityMapperUtility.convert(response.getItems());
+            shuffle(searchResultList);
+        } else {
+
+            searchResultList = new ArrayList<>();
         }
 
         return searchResultList;
@@ -52,5 +59,17 @@ public class MMSCategoryVideoFetcher extends GetYouTubeVideos {
     @Override
     public boolean noMoreVideoPages() {
         return noMoreVideoPages;
+    }
+
+    /**
+     * shuffles the list
+     * @param videos
+     */
+    private void shuffle (List<YouTubeVideo> videos) {
+
+        if (videos == null || videos.isEmpty())
+            return;
+        else
+            Collections.shuffle(videos);
     }
 }
