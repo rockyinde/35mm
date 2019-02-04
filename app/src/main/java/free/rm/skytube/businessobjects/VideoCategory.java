@@ -27,6 +27,7 @@ import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideoBySearch;
 import free.rm.skytube.businessobjects.YouTube.GetYouTubeVideos;
 import free.rm.skytube.businessobjects.db.Tasks.GetSubscriptionsVideosFromDb;
 import free.rm.skytube.mms.fragments.MMSCategoryVideoFetcher;
+import free.rm.skytube.mms.fragments.MMSSearcher;
 
 /**
  * Represents a video category/group.
@@ -80,7 +81,7 @@ public enum VideoCategory {
 		else if (id == MOST_POPULAR.id)
 			return new GetMostPopularVideos();
 		else if (id == SEARCH_QUERY.id)
-			return new GetYouTubeVideoBySearch();
+			return new MMSSearcher();
 		else if (id == CHANNEL_VIDEOS.id)
 			return new GetChannelVideos();
 		else if (id == SUBSCRIPTIONS_FEED_VIDEOS.id)

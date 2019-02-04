@@ -4,6 +4,7 @@ import java.util.List;
 
 import free.rm.skytube.rest.entity.MMSFetchVideosRequest;
 import free.rm.skytube.rest.entity.MMSFetchVideosResponse;
+import free.rm.skytube.rest.entity.MMSSearchRequest;
 import free.rm.skytube.rest.entity.SeventyMMVideo;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -18,4 +19,7 @@ public interface SeventyMMService {
 
     @POST("save")
     Call<SeventyMMVideo> save (@Body SeventyMMVideo video);
+
+    @POST("search")
+    Call<MMSFetchVideosResponse> search (@Body MMSSearchRequest request);
 }

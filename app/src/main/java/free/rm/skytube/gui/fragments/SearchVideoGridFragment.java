@@ -76,28 +76,28 @@ public class SearchVideoGridFragment extends VideosGridFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//		final MenuItem   searchMenuItem = menu.findItem(R.id.menu_search);
-//		final SearchView searchView = (SearchView) searchMenuItem.getActionView();
-//
-//		// will be called when the user clicks on the actionbar's search icon
-//		searchMenuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
-//			@Override
-//			public boolean onMenuItemActionExpand(MenuItem item) {
-//				// if the user has previously search, then copy the query into the search view
-//				if (searchQuery != null  &&  !searchQuery.isEmpty()) {
-//					searchView.onActionViewExpanded();
-//					searchView.setQuery(searchQuery, false);
-//				}
-//
-//				// now expand the search view
-//				return true;
-//			}
-//
-//			@Override
-//			public boolean onMenuItemActionCollapse(MenuItem item) {
-//				return true;
-//			}
-//		});
+		final MenuItem   searchMenuItem = menu.findItem(R.id.menu_search);
+		final SearchView searchView = (SearchView) searchMenuItem.getActionView();
+
+		// will be called when the user clicks on the actionbar's search icon
+		searchMenuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+			@Override
+			public boolean onMenuItemActionExpand(MenuItem item) {
+				// if the user has previously search, then copy the query into the search view
+				if (searchQuery != null  &&  !searchQuery.isEmpty()) {
+					searchView.onActionViewExpanded();
+					searchView.setQuery(searchQuery, false);
+				}
+
+				// now expand the search view
+				return true;
+			}
+
+			@Override
+			public boolean onMenuItemActionCollapse(MenuItem item) {
+				return true;
+			}
+		});
 	}
 
 

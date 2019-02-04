@@ -11,6 +11,7 @@ import free.rm.skytube.mms.utility.MMSEntityMapperUtility;
 import free.rm.skytube.rest.entity.MMSFetchVideosRequest;
 import free.rm.skytube.rest.entity.MMSFetchVideosResponse;
 import free.rm.skytube.rest.entity.MMSPageToken;
+import free.rm.skytube.rest.entity.MMSSearchRequest;
 import free.rm.skytube.rest.entity.SeventyMMVideo;
 import free.rm.skytube.rest.service.SeventyMMService;
 import retrofit2.Call;
@@ -41,6 +42,34 @@ public class ServiceProvider {
                 save(id, cat, body, title);
             }
         }).start();
+    }
+
+    /**
+     * makes a search request to backend
+     *
+     * @param query
+     * @param pt
+     * @return
+     */
+    public static MMSFetchVideosResponse search (String query, MMSPageToken pt) {
+
+        MMSSearchRequest request = new MMSSearchRequest();
+        request.setQ(query);
+        request.setPt(pt);
+
+        Call<MMSFetchVideosResponse> call = SEVENTY_MM_SERVICE.search(request);
+
+        try {
+
+            Response<MMSFetchVideosResponse> response = call.execute();
+            Log.i("MMS", "search successful");
+
+            return response.body();
+        } catch (IOException e) {
+
+            Log.e("service", "error", e);
+            return null;
+        }
     }
 
     public static MMSFetchVideosResponse fetchVideos (String cat, MMSPageToken pt) {

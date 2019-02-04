@@ -177,63 +177,63 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 	public boolean onCreateOptionsMenu(final Menu menu) {
 		getMenuInflater().inflate(R.menu.main_activity_menu, menu);
 
-//		// setup the SearchView (actionbar)
-//		final MenuItem searchItem = menu.findItem(R.id.menu_search);
-//		final SearchView searchView = (SearchView) searchItem.getActionView();
-//
-//		searchView.setQueryHint(getString(R.string.search_videos));
-//
-//		// set the query hints to be equal to the previously searched text
-//		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//			@Override
-//			public boolean onQueryTextChange(final String newText) {
-//				// if the user does not want to have the search string saved, then skip the below...
-//				if (SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_search_history), false)
-//						||  newText == null  ||  newText.length() <= 1) {
-//					return false;
-//				}
-//
-//				SearchHistoryCursorAdapter searchHistoryCursorAdapter = (SearchHistoryCursorAdapter) searchView.getSuggestionsAdapter();
-//				Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSearchCursor(newText);
-//
-//				// if the adapter has not been created, then create it
-//				if (searchHistoryCursorAdapter == null) {
-//					searchHistoryCursorAdapter = new SearchHistoryCursorAdapter(getBaseContext(),
-//							R.layout.search_hint,
-//							cursor,
-//							new String[]{SearchHistoryTable.COL_SEARCH_TEXT},
-//							new int[]{android.R.id.text1},
-//							0);
-//					searchHistoryCursorAdapter.setSearchHistoryClickListener(new SearchHistoryClickListener() {
-//						@Override
-//						public void onClick(String query) {
-//							displaySearchResults(query);
-//						}
-//					});
-//					searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
-//				} else {
-//					// else just change the cursor...
-//					searchHistoryCursorAdapter.changeCursor(cursor);
-//				}
-//
-//				return true;
-//			}
-//
-//			@Override
-//			public boolean onQueryTextSubmit(String query) {
-//				// hide the keyboard
-//				searchView.clearFocus();
-//
-//				if(!SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_search_history), false)) {
-//					// Save this search string into the Search History Database (for Suggestions)
-//					SearchHistoryDb.getSearchHistoryDb().insertSearchText(query);
-//				}
-//
-//				displaySearchResults(query);
-//
-//				return true;
-//			}
-//		});
+		// setup the SearchView (actionbar)
+		final MenuItem searchItem = menu.findItem(R.id.menu_search);
+		final SearchView searchView = (SearchView) searchItem.getActionView();
+
+		searchView.setQueryHint(getString(R.string.search_videos));
+
+		// set the query hints to be equal to the previously searched text
+		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextChange(final String newText) {
+				// if the user does not want to have the search string saved, then skip the below...
+				if (SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_search_history), false)
+						||  newText == null  ||  newText.length() <= 1) {
+					return false;
+				}
+
+				SearchHistoryCursorAdapter searchHistoryCursorAdapter = (SearchHistoryCursorAdapter) searchView.getSuggestionsAdapter();
+				Cursor cursor = SearchHistoryDb.getSearchHistoryDb().getSearchCursor(newText);
+
+				// if the adapter has not been created, then create it
+				if (searchHistoryCursorAdapter == null) {
+					searchHistoryCursorAdapter = new SearchHistoryCursorAdapter(getBaseContext(),
+							R.layout.search_hint,
+							cursor,
+							new String[]{SearchHistoryTable.COL_SEARCH_TEXT},
+							new int[]{android.R.id.text1},
+							0);
+					searchHistoryCursorAdapter.setSearchHistoryClickListener(new SearchHistoryClickListener() {
+						@Override
+						public void onClick(String query) {
+							displaySearchResults(query);
+						}
+					});
+					searchView.setSuggestionsAdapter(searchHistoryCursorAdapter);
+				} else {
+					// else just change the cursor...
+					searchHistoryCursorAdapter.changeCursor(cursor);
+				}
+
+				return true;
+			}
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				// hide the keyboard
+				searchView.clearFocus();
+
+				if(!SkyTubeApp.getPreferenceManager().getBoolean(SkyTubeApp.getStr(R.string.pref_key_disable_search_history), false)) {
+					// Save this search string into the Search History Database (for Suggestions)
+					SearchHistoryDb.getSearchHistoryDb().insertSearchText(query);
+				}
+
+				displaySearchResults(query);
+
+				return true;
+			}
+		});
 
 		return true;
 	}
