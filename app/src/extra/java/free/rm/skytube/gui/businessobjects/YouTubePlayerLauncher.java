@@ -22,6 +22,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -29,6 +30,8 @@ import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeAPIKey;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
+import free.rm.skytube.gui.activities.YouTubePlayerActivity;
+import free.rm.skytube.gui.fragments.YouTubePlayerFragment;
 
 /**
  * Launches YouTube player.
@@ -44,7 +47,13 @@ public class YouTubePlayerLauncher {
 	 */
 	public static void launch(YouTubeVideo youTubeVideo, Context context) {
 
+		if (useOfficialYouTubePlayer(context))
 			launchOfficialYouTubePlayer(youTubeVideo.getId(), context);
+		else
+			launchCustomYouTubePlayer(
+					youTubeVideo,
+					context
+			);
 	}
 
 
@@ -55,7 +64,11 @@ public class YouTubePlayerLauncher {
 	 */
 	public static void launch(String videoUrl, Context context) {
 
+		if (useOfficialYouTubePlayer(context))
 			launchOfficialYouTubePlayer(YouTubeVideo.getYouTubeIdFromUrl(videoUrl), context);
+
+		else
+			launchCustomYouTubePlayer(videoUrl, context);
 	}
 
 
@@ -95,6 +108,28 @@ public class YouTubePlayerLauncher {
 					.setNeutralButton(android.R.string.ok, null)
 					.show();
 		}
+	}
+
+	/**
+	 * Launches the custom-made YouTube player so that the user can view the selected video.
+	 *
+	 * @param youTubeVideo Video to be viewed.
+	 */
+	public static void launchCustomYouTubePlayer(YouTubeVideo youTubeVideo, Context context) {
+		Intent i = new Intent(context, YouTubePlayerActivity.class);
+		i.putExtra(YouTubePlayerFragment.YOUTUBE_VIDEO_OBJ, youTubeVideo);
+		context.startActivity(i);
+	}
+
+
+	/**
+	 * Launch the custom-made YouTube player.
+	 */
+	private static void launchCustomYouTubePlayer(String videoUrl, Context context) {
+		Intent i = new Intent(context, YouTubePlayerActivity.class);
+		i.setAction(Intent.ACTION_VIEW);
+		i.setData(Uri.parse(videoUrl));
+		context.startActivity(i);
 	}
 
 }
