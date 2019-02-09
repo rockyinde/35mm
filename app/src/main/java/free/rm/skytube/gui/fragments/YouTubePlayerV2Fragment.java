@@ -272,24 +272,24 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 
 		// ask the user if he wants to resume playing this video (if he has played it in the past...)
 		if(!SkyTubeApp.getPreferenceManager().getBoolean(getString(R.string.pref_key_disable_playback_status), false) && PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).position > 0) {
-			new SkyTubeMaterialDialog(getContext())
-					.content(R.string.should_resume)
-					.positiveText(R.string.resume)
-					.onPositive(new MaterialDialog.SingleButtonCallback() {
-						@Override
-						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//			new SkyTubeMaterialDialog(getContext())
+//					.content(R.string.should_resume)
+//					.positiveText(R.string.resume)
+//					.onPositive(new MaterialDialog.SingleButtonCallback() {
+//						@Override
+//						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 							playerInitialPosition = PlaybackStatusDb.getVideoDownloadsDb().getVideoWatchedStatus(youTubeVideo).position;
 							loadVideo();
-						}
-					})
-					.negativeText(R.string.no)
-					.onNegative(new MaterialDialog.SingleButtonCallback() {
-						@Override
-						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-							loadVideo();
-						}
-					})
-					.show();
+//						}
+//					})
+//					.negativeText(R.string.no)
+//					.onNegative(new MaterialDialog.SingleButtonCallback() {
+//						@Override
+//						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//							loadVideo();
+//						}
+//					})
+//					.show();
 		} else {
 			loadVideo();
 		}
