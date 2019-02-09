@@ -24,6 +24,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -142,6 +145,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 				}
 			}
 		}
+
+		if (!isOnline())
+			displayNoInternetDialog();
 
 	}
 
@@ -399,5 +405,39 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 		bundle.putString(SearchVideoGridFragment.QUERY, query);
 		searchVideoGridFragment.setArguments(bundle);
 		switchToFragment(searchVideoGridFragment);
+	}
+
+    /**
+     * displays an error message suggesting to the user
+     * that the internet is not available
+     * to the app
+     */
+	private void displayNoInternetDialog() {
+
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(this);
+        }
+        builder.setTitle("No Internet Connection\nఇంటర్నెట్ కనెక్షన్ చెక్ చేయండి")
+                .setMessage("Please check your internet connection and swipe to refresh.\n" +
+                        "ఇంటర్నెట్ కనెక్షన్ చెక్ చేసి కిందికి స్వైప్ చేయండి."
+                )
+                .setNegativeButton(android.R.string.ok, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+	}
+
+    /**
+     * checks if the device is online, i.e., has internet connectivity
+     *
+     * @return
+     */
+	public boolean isOnline() {
+		ConnectivityManager cm =
+				(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		return netInfo != null && netInfo.isConnectedOrConnecting();
 	}
 }
