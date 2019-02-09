@@ -39,6 +39,11 @@ public class MMSCategoryVideoFetcher extends GetYouTubeVideos {
             // set the page token/id to retrieve
             MMSFetchVideosResponse response = ServiceProvider.fetchVideos(category, mmsPageToken);
 
+            if (response == null) {
+                noMoreVideoPages = true;
+                return new ArrayList<>();
+            }
+
             // set the next page token
             mmsPageToken = response.getLastEvaluatedKey();
 
