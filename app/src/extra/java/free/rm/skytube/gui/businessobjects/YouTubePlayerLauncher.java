@@ -82,7 +82,8 @@ public class YouTubePlayerLauncher {
 		SharedPreferences   sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 		String              str = sharedPref.getString(SkyTubeApp.getStr(R.string.pref_key_choose_player), SkyTubeApp.getStr(R.string.pref_default_player_value));
 
-		return  (str.equals(SkyTubeApp.getStr(R.string.pref_official_player_value)));
+//		return  (str.equals(SkyTubeApp.getStr(R.string.pref_official_player_value)));
+		return true;
 	}
 
 
