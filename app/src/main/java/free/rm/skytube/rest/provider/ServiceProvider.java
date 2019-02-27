@@ -12,6 +12,8 @@ import free.rm.skytube.rest.entity.MMSFetchVideosRequest;
 import free.rm.skytube.rest.entity.MMSFetchVideosResponse;
 import free.rm.skytube.rest.entity.MMSPageToken;
 import free.rm.skytube.rest.entity.MMSSearchRequest;
+import free.rm.skytube.rest.entity.MMSUpdateVideoRequest;
+import free.rm.skytube.rest.entity.MMSUpdateVideoResponse;
 import free.rm.skytube.rest.entity.SeventyMMVideo;
 import free.rm.skytube.rest.service.SeventyMMService;
 import retrofit2.Call;
@@ -42,6 +44,40 @@ public class ServiceProvider {
                 save(id, cat, body, title);
             }
         }).start();
+    }
+
+    public static void asyncUpdate (final String id, final String cat, final String op) {
+
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                // Do network action in this function
+                update (id, cat, op);
+            }
+        }).start();
+    }
+
+    public static MMSUpdateVideoResponse update (String id, String cat, String op) {
+
+        MMSUpdateVideoRequest request = new MMSUpdateVideoRequest();
+        request.setCat(cat);
+        request.setId(id);
+        request.setOp(op);
+
+        Call<MMSUpdateVideoResponse> call = SEVENTY_MM_SERVICE.update(request);
+
+        try {
+
+            Response<MMSUpdateVideoResponse> response = call.execute();
+            Log.i("MMS", "update successful");
+
+            return response.body();
+        } catch (IOException e) {
+
+            Log.e("service", "error", e);
+            return null;
+        }
+
     }
 
     /**

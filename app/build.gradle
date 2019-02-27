@@ -6,12 +6,12 @@ android {
     buildToolsVersion '27.0.3'
 
     defaultConfig {
-        applicationId "t5mm.brownbagguide.info"
+        applicationId "admin.t5mm.brownbagguide.info"
         minSdkVersion 15
         targetSdkVersion 27
 
-        versionName "1.03"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 4
+        versionName "1.00"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 1
 
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4"'
@@ -33,19 +33,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    flavorDimensions "t5mm"
+    flavorDimensions "admin.t5mm"
     productFlavors {
         // 100% Open-Source Edition
         oss {
-            applicationId "t5mm.brownbagguide.info.oss"
-            resValue "string", "app_name", "47mm"
-            dimension "t5mm"
+            applicationId "admin.t5mm.brownbagguide.info.oss"
+            resValue "string", "app_name", "ADMIN"
+            dimension "admin.t5mm"
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
-            applicationId "t5mm.brownbagguide.info.extra"
-            resValue "string", "app_name", "47mm"
-            dimension "t5mm"
+            applicationId "admin.t5mm.brownbagguide.info.extra"
+            resValue "string", "app_name", "ADMIN"
+            dimension "admin.t5mm"
         }
     }
     // Generate APK filenames as follows:  <App Name>-<Flavor><Version>

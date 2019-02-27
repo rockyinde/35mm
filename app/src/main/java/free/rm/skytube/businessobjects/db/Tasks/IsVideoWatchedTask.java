@@ -27,7 +27,7 @@ public class IsVideoWatchedTask extends AsyncTaskParallel<Void, Void, Boolean> {
 	@Override
 	protected void onPostExecute(Boolean videoIsWatched) {
 		// if this video has been watched, hide the set watched option and show the set unwatched option.
-		menu.findItem(R.id.mark_watched).setVisible(!videoIsWatched);
-		menu.findItem(R.id.mark_unwatched).setVisible(videoIsWatched);
+//		menu.findItem(R.id.mark_watched).setVisible(!videoIsWatched);
+//		menu.findItem(R.id.mark_unwatched).setVisible(videoIsWatched);
 	}
 }

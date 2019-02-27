@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="delete_from_mms">Delete</string>
+    <string name="add_to_cat_r">Recent</string>
+    <string name="add_to_cat_h">Hits</string>
+    <string name="add_to_cat_c">Comedy</string>
+    <string name="add_to_cat_p">Past</string>
+    <string name="add_to_cat_o">Old</string>
+</resources>

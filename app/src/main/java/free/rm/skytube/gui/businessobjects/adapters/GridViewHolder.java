@@ -106,12 +106,12 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 
 		view.findViewById(R.id.channel_layout).setOnClickListener(showChannelInfo ? channelOnClickListener : null);
 
-//		view.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				onOptionsButtonClick(v);
-//			}
-//		});
+		view.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onOptionsButtonClick(v);
+			}
+		});
 	}
 
 
@@ -184,15 +184,16 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 		final PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
 		popupMenu.getMenuInflater().inflate(R.menu.video_options_menu, popupMenu.getMenu());
 		Menu menu = popupMenu.getMenu();
-		new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
+//		new IsVideoBookmarkedTask(youTubeVideo, menu).executeInParallel();
 
 		// If playback history is not disabled, see if this video has been watched. Otherwise, hide the "mark watched" & "mark unwatched" options from the menu.
 		if(!SkyTubeApp.getPreferenceManager().getBoolean(context.getString(R.string.pref_key_disable_playback_status), false)) {
 			new IsVideoWatchedTask(youTubeVideo, menu).executeInParallel();
-		} else {
-			popupMenu.getMenu().findItem(R.id.mark_watched).setVisible(false);
-			popupMenu.getMenu().findItem(R.id.mark_unwatched).setVisible(false);
 		}
+//		else {
+//			popupMenu.getMenu().findItem(R.id.mark_watched).setVisible(false);
+//			popupMenu.getMenu().findItem(R.id.mark_unwatched).setVisible(false);
+//		}
 
 //		if(youTubeVideo.isDownloaded()) {
 //			popupMenu.getMenu().findItem(R.id.delete_download).setVisible(true);
@@ -209,43 +210,61 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				switch(item.getItemId()) {
-					case R.id.menu_open_video_with:
-						Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(youTubeVideo.getVideoUrl()));
-						context.startActivity(browserIntent);
+//					case R.id.menu_open_video_with:
+//						Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(youTubeVideo.getVideoUrl()));
+//						context.startActivity(browserIntent);
+//						return true;
+//					case R.id.share:
+//						youTubeVideo.shareVideo(view.getContext());
+//						return true;
+//					case R.id.copyurl:
+//						youTubeVideo.copyUrl(context);
+//						return true;
+//					case R.id.mark_watched:
+//						PlaybackStatusDb.getVideoDownloadsDb().setVideoWatchedStatus(youTubeVideo, true);
+//						updateViewsData();
+//						return true;
+//					case R.id.mark_unwatched:
+//						PlaybackStatusDb.getVideoDownloadsDb().setVideoWatchedStatus(youTubeVideo, false);
+//						updateViewsData();
+//						return true;
+					case R.id.delete_from_mms:
+						youTubeVideo.deleteFromMMS(context);
 						return true;
-					case R.id.share:
-						youTubeVideo.shareVideo(view.getContext());
+					case R.id.add_to_cat_r:
+						youTubeVideo.updateCatInMMS(context,"r");
 						return true;
-					case R.id.copyurl:
-						youTubeVideo.copyUrl(context);
+					case R.id.add_to_cat_h:
+						youTubeVideo.updateCatInMMS(context,"h");
 						return true;
-					case R.id.mark_watched:
-						PlaybackStatusDb.getVideoDownloadsDb().setVideoWatchedStatus(youTubeVideo, true);
-						updateViewsData();
+					case R.id.add_to_cat_c:
+						youTubeVideo.updateCatInMMS(context,"c");
 						return true;
-					case R.id.mark_unwatched:
-						PlaybackStatusDb.getVideoDownloadsDb().setVideoWatchedStatus(youTubeVideo, false);
-						updateViewsData();
+					case R.id.add_to_cat_p:
+						youTubeVideo.updateCatInMMS(context,"p");
 						return true;
-					case R.id.bookmark_video:
-						youTubeVideo.bookmarkVideo(context, popupMenu.getMenu());
+					case R.id.add_to_cat_o:
+						youTubeVideo.updateCatInMMS(context,"o");
 						return true;
-					case R.id.unbookmark_video:
-						youTubeVideo.unbookmarkVideo(context, popupMenu.getMenu());
-						return true;
-					case R.id.view_thumbnail:
-						Intent i = new Intent(context, ThumbnailViewerActivity.class);
-						i.putExtra(ThumbnailViewerActivity.YOUTUBE_VIDEO, youTubeVideo);
-						context.startActivity(i);
-						return true;
+//					case R.id.bookmark_video:
+//						youTubeVideo.bookmarkVideo(context, popupMenu.getMenu());
+//						return true;
+//					case R.id.unbookmark_video:
+//						youTubeVideo.unbookmarkVideo(context, popupMenu.getMenu());
+//						return true;
+//					case R.id.view_thumbnail:
+//						Intent i = new Intent(context, ThumbnailViewerActivity.class);
+//						i.putExtra(ThumbnailViewerActivity.YOUTUBE_VIDEO, youTubeVideo);
+//						context.startActivity(i);
+//						return true;
 //					case R.id.delete_download:
 //						youTubeVideo.removeDownload();
 //						return true;
 //					case R.id.download_video:
 //						youTubeVideo.downloadVideo(context);
 //						return true;
-					case R.id.block_channel:
-						youTubeVideo.getChannel().blockChannel();
+//					case R.id.block_channel:
+//						youTubeVideo.getChannel().blockChannel();
 				}
 				return false;
 			}

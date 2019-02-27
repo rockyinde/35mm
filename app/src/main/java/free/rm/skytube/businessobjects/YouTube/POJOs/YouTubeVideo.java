@@ -18,6 +18,7 @@
 package free.rm.skytube.businessobjects.YouTube.POJOs;
 
 import android.app.DownloadManager;
+import android.app.Service;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -57,6 +58,8 @@ import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.businessobjects.interfaces.GetDesiredStreamListener;
 import free.rm.skytube.businessobjects.utilities.CleanTubeConstants;
+import free.rm.skytube.rest.entity.MMSUpdateVideoResponse;
+import free.rm.skytube.rest.provider.ServiceProvider;
 
 import static free.rm.skytube.app.SkyTubeApp.getContext;
 import static free.rm.skytube.app.SkyTubeApp.getStr;
@@ -453,6 +456,23 @@ public class YouTubeVideo implements Serializable {
 			menu.findItem(R.id.bookmark_video).setVisible(false);
 			menu.findItem(R.id.unbookmark_video).setVisible(true);
 		}
+	}
+
+	public void deleteFromMMS (Context context) {
+
+	    ServiceProvider.asyncUpdate(id,null, "d");
+		Toast.makeText(context,
+				R.string.video_unbookmarked,
+				Toast.LENGTH_LONG).show();
+	}
+
+	public void updateCatInMMS (Context context, String cat) {
+
+		ServiceProvider.asyncUpdate(id,cat, "u");
+
+		Toast.makeText(context,
+				R.string.video_bookmarked,
+				Toast.LENGTH_LONG).show();
 	}
 
 	public void unbookmarkVideo(Context context, Menu menu) {

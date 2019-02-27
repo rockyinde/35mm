@@ -46,7 +46,7 @@ public class IsVideoBookmarkedTask extends AsyncTaskParallel<Void, Void, Boolean
 	@Override
 	protected void onPostExecute(Boolean videoIsBookmarked) {
 		// if this video has been bookmarked, hide the bookmark option and show the unbookmark option.
-		menu.findItem(R.id.bookmark_video).setVisible(!videoIsBookmarked);
-		menu.findItem(R.id.unbookmark_video).setVisible(videoIsBookmarked);
+//		menu.findItem(R.id.bookmark_video).setVisible(!videoIsBookmarked);
+//		menu.findItem(R.id.unbookmark_video).setVisible(videoIsBookmarked);
 	}
 }
