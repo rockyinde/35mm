@@ -31,6 +31,7 @@ import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
 import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
+import free.rm.skytube.mms.fragments.MMSNewlyAddedFragment;
 
 public class MainFragment extends FragmentEx {
 
@@ -48,6 +49,7 @@ public class MainFragment extends FragmentEx {
 	private MMSComedyFragment 			comedyFragment = null;
 	private MMSPastFragment 			pastFragment = null;
 	private MMSOldFragment 				oldFragment = null;
+	private MMSNewlyAddedFragment 		newlyAddedFragment = null;
 	private MostPopularVideosFragment	mostPopularVideosFragment = null;
 	private SubscriptionsFeedFragment   subscriptionsFeedFragment = null;
 	private BookmarksFragment			bookmarksFragment = null;
@@ -60,6 +62,7 @@ public class MainFragment extends FragmentEx {
 	public static final String COMEDY_FRAGMENT = "MainFragment.comedyFragment";
 	public static final String PAST_FRAGMENT = "MainFragment.pastFragment";
 	public static final String OLD_FRAGMENT = "MainFragment.oldFragment";
+    public static final String NEWLY_ADDED_FRAGMENT = "MainFragment.newlyAddedFragment";
 	public static final String MOST_POPULAR_VIDEOS_FRAGMENT = "MainFragment.mostPopularVideosFragment";
 	public static final String SUBSCRIPTIONS_FEED_FRAGMENT = "MainFragment.subscriptionsFeedFragment";
 	public static final String BOOKMARKS_FRAGMENT = "MainFragment.bookmarksFragment";
@@ -82,6 +85,7 @@ public class MainFragment extends FragmentEx {
 			comedyFragment = (MMSComedyFragment) getChildFragmentManager().getFragment(savedInstanceState, COMEDY_FRAGMENT);
 			pastFragment = (MMSPastFragment) getChildFragmentManager().getFragment(savedInstanceState, PAST_FRAGMENT);
 			oldFragment = (MMSOldFragment) getChildFragmentManager().getFragment(savedInstanceState, OLD_FRAGMENT);
+            newlyAddedFragment = (MMSNewlyAddedFragment) getChildFragmentManager().getFragment(savedInstanceState, NEWLY_ADDED_FRAGMENT);
 			mostPopularVideosFragment = (MostPopularVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, MOST_POPULAR_VIDEOS_FRAGMENT);
 			subscriptionsFeedFragment = (SubscriptionsFeedFragment)getChildFragmentManager().getFragment(savedInstanceState, SUBSCRIPTIONS_FEED_FRAGMENT);
 			bookmarksFragment = (BookmarksFragment) getChildFragmentManager().getFragment(savedInstanceState, BOOKMARKS_FRAGMENT);
@@ -230,7 +234,10 @@ public class MainFragment extends FragmentEx {
 			if (oldFragment == null)
 				oldFragment = new MMSOldFragment();
 
-			if (mostPopularVideosFragment == null)
+            if (newlyAddedFragment == null)
+                newlyAddedFragment = new MMSNewlyAddedFragment();
+
+            if (mostPopularVideosFragment == null)
 				mostPopularVideosFragment = new MostPopularVideosFragment();
 
 			if (subscriptionsFeedFragment == null)
@@ -249,6 +256,7 @@ public class MainFragment extends FragmentEx {
 			// add fragments to list:  do NOT forget to ***UPDATE*** @string/default_tab and @string/default_tab_values
 			videoGridFragmentsList.clear();
 //			videoGridFragmentsList.add(featuredVideosFragment);
+            videoGridFragmentsList.add(newlyAddedFragment);
 			videoGridFragmentsList.add(recentFragment);
 			videoGridFragmentsList.add(hitsFragment);
 			videoGridFragmentsList.add(comedyFragment);
@@ -291,6 +299,8 @@ public class MainFragment extends FragmentEx {
 			getChildFragmentManager().putFragment(outState, PAST_FRAGMENT, pastFragment);
 		if(oldFragment != null && oldFragment.isAdded())
 			getChildFragmentManager().putFragment(outState, OLD_FRAGMENT, oldFragment);
+        if(newlyAddedFragment != null && newlyAddedFragment.isAdded())
+            getChildFragmentManager().putFragment(outState, NEWLY_ADDED_FRAGMENT, newlyAddedFragment);
 //		if(mostPopularVideosFragment != null && mostPopularVideosFragment.isAdded())
 //			getChildFragmentManager().putFragment(outState, MOST_POPULAR_VIDEOS_FRAGMENT, mostPopularVideosFragment);
 //		if(subscriptionsFeedFragment != null && subscriptionsFeedFragment.isAdded())
