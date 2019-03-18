@@ -104,7 +104,7 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 			}
 		};
 
-		view.findViewById(R.id.channel_layout).setOnClickListener(showChannelInfo ? channelOnClickListener : null);
+//		view.findViewById(R.id.channel_layout).setOnClickListener(showChannelInfo ? channelOnClickListener : null);
 
 //		view.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
 //			@Override
