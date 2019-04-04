@@ -100,7 +100,7 @@ public class MainFragment extends FragmentEx {
 		setSupportActionBar(toolbar);
 
 		// indicate that this fragment has an action bar menu
-//		setHasOptionsMenu(true);
+		setHasOptionsMenu(true);
 
 		subsDrawerLayout = view.findViewById(R.id.subs_drawer_layout);
 		subsDrawerToggle = new ActionBarDrawerToggle(
@@ -256,7 +256,7 @@ public class MainFragment extends FragmentEx {
 			videoGridFragmentsList.add(oldFragment);
 //			videoGridFragmentsList.add(mostPopularVideosFragment);
 //			videoGridFragmentsList.add(subscriptionsFeedFragment);
-//			videoGridFragmentsList.add(bookmarksFragment);
+			videoGridFragmentsList.add(bookmarksFragment);
 //			videoGridFragmentsList.add(downloadedVideosFragment);
 		}
 
@@ -295,8 +295,8 @@ public class MainFragment extends FragmentEx {
 //			getChildFragmentManager().putFragment(outState, MOST_POPULAR_VIDEOS_FRAGMENT, mostPopularVideosFragment);
 //		if(subscriptionsFeedFragment != null && subscriptionsFeedFragment.isAdded())
 //			getChildFragmentManager().putFragment(outState, SUBSCRIPTIONS_FEED_FRAGMENT, subscriptionsFeedFragment);
-//		if(bookmarksFragment != null && bookmarksFragment.isAdded())
-//			getChildFragmentManager().putFragment(outState, BOOKMARKS_FRAGMENT, bookmarksFragment);
+		if(bookmarksFragment != null && bookmarksFragment.isAdded())
+			getChildFragmentManager().putFragment(outState, BOOKMARKS_FRAGMENT, bookmarksFragment);
 //		if(downloadedVideosFragment != null && downloadedVideosFragment.isAdded())
 //			getChildFragmentManager().putFragment(outState, DOWNLOADED_VIDEOS_FRAGMENT, downloadedVideosFragment);
 

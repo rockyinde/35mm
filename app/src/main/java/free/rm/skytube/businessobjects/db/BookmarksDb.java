@@ -92,9 +92,9 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 	 * @return True if the video was successfully saved/bookmarked to the DB.
 	 */
 	public boolean add(YouTubeVideo video) {
-		Gson gson = new Gson();
 		ContentValues values = new ContentValues();
 
+		Gson gson = new Gson();
 		String id = video.getId();
 		String cat = "new";
 		String body = gson.toJson(video);
@@ -112,7 +112,7 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 		onUpdated();
 
 		// add to cloud
-        ServiceProvider.asyncSave(id, cat, body, title);
+//        ServiceProvider.asyncSave(id, cat, body, title);
 
 		return addSuccessful;
 	}

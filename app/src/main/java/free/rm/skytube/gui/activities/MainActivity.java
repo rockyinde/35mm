@@ -420,9 +420,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
         } else {
             builder = new AlertDialog.Builder(this);
         }
-        builder.setTitle("No Internet Connection\nఇంటర్నెట్ కనెక్షన్ చెక్ చేయండి")
+        builder.setTitle("No Internet Connection\nఇంటర్నెట్ కనెక్షన్ పొందటం లేదు")
                 .setMessage("Please check your internet connection and swipe to refresh.\n" +
-                        "ఇంటర్నెట్ కనెక్షన్ చెక్ చేసి కిందికి స్వైప్ చేయండి."
+                        "ఇంటర్నెట్ కనెక్షన్ సరి చేసి కిందికి స్వైప్ చేయండి."
                 )
                 .setNegativeButton(android.R.string.ok, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)

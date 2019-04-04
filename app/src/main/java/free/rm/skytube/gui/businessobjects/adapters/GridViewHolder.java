@@ -106,12 +106,12 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 
 //		view.findViewById(R.id.channel_layout).setOnClickListener(showChannelInfo ? channelOnClickListener : null);
 
-//		view.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				onOptionsButtonClick(v);
-//			}
-//		});
+		view.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onOptionsButtonClick(v);
+			}
+		});
 	}
 
 
@@ -209,16 +209,16 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				switch(item.getItemId()) {
-					case R.id.menu_open_video_with:
-						Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(youTubeVideo.getVideoUrl()));
-						context.startActivity(browserIntent);
-						return true;
-					case R.id.share:
-						youTubeVideo.shareVideo(view.getContext());
-						return true;
-					case R.id.copyurl:
-						youTubeVideo.copyUrl(context);
-						return true;
+//					case R.id.menu_open_video_with:
+//						Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(youTubeVideo.getVideoUrl()));
+//						context.startActivity(browserIntent);
+//						return true;
+//					case R.id.share:
+//						youTubeVideo.shareVideo(view.getContext());
+//						return true;
+//					case R.id.copyurl:
+//						youTubeVideo.copyUrl(context);
+//						return true;
 					case R.id.mark_watched:
 						PlaybackStatusDb.getVideoDownloadsDb().setVideoWatchedStatus(youTubeVideo, true);
 						updateViewsData();
@@ -244,8 +244,8 @@ class GridViewHolder extends RecyclerView.ViewHolder {
 //					case R.id.download_video:
 //						youTubeVideo.downloadVideo(context);
 //						return true;
-					case R.id.block_channel:
-						youTubeVideo.getChannel().blockChannel();
+//					case R.id.block_channel:
+//						youTubeVideo.getChannel().blockChannel();
 				}
 				return false;
 			}
