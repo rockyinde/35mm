@@ -20,6 +20,10 @@ public class MMSEntityMapperUtility {
 
         List<YouTubeVideo> videos = new ArrayList<>();
 
+        // NPE: https://play.google.com/apps/publish/?account=7432842166583459741#AndroidMetricsErrorsPlace:p=t5mm.brownbagguide.info.extra&appid=4973782118037346501&appVersion&lastReportedRange=LAST_60_DAYS&clusterName=apps/t5mm.brownbagguide.info.extra/clusters/cba09888&detailsAppVersion
+        if (mmsVideos == null)
+            return videos;
+
         for (SeventyMMVideo video : mmsVideos) {
 
             // add the video to the list

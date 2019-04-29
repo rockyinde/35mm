@@ -334,7 +334,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 					@Override
 					public void onGetDesiredStreamError(String errorMessage) {
 						if (errorMessage != null) {
-							new AlertDialog.Builder(getContext())
+							new AlertDialog.Builder(getActivity())
 											.setMessage(errorMessage)
 											.setTitle(R.string.error_video_play)
 											.setCancelable(false)
@@ -351,7 +351,7 @@ public class YouTubePlayerV2Fragment extends ImmersiveModeFragment implements Yo
 			}
 		} else {
 			// video is live:  ask the user if he wants to play the video using an other app
-			new AlertDialog.Builder(getContext())
+			new AlertDialog.Builder(getActivity())
 					.setMessage(R.string.warning_live_video)
 					.setTitle(R.string.error_video_play)
 					.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

@@ -43,6 +43,13 @@ public class MMSSearcher extends GetYouTubeVideos {
             // set the page token/id to retrieve
             MMSFetchVideosResponse response = ServiceProvider.search(query, mmsPageToken);
 
+            if (response == null) {
+
+                // network error
+                noMoreVideoPages = true;
+                return new ArrayList<>();
+            }
+
             // set the next page token
             mmsPageToken = response.getLastEvaluatedKey();
 
