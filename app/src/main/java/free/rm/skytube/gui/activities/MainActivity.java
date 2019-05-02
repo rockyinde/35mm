@@ -178,7 +178,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityListe
 			channelBrowserFragment.getChannelPlaylistsFragment().setMainActivityListener(this);
 	}
 
-
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
 		getMenuInflater().inflate(R.menu.main_activity_menu, menu);
