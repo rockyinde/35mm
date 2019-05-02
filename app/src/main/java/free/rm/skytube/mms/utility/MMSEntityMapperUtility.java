@@ -13,6 +13,8 @@ import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeChannel;
 import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import free.rm.skytube.rest.entity.SeventyMMVideo;
+import free.rm.skytube.rest.entity.elastic.HitSourceEntity;
+import free.rm.skytube.rest.entity.elastic.HitsEntity;
 
 public class MMSEntityMapperUtility {
 
@@ -28,6 +30,23 @@ public class MMSEntityMapperUtility {
 
             // add the video to the list
             videos.add(convert(video.getBody()));
+        }
+
+        return videos;
+    }
+
+    public static List<YouTubeVideo> convert (HitSourceEntity[] hitsEntities) {
+
+        List<YouTubeVideo> videos = new ArrayList<>();
+
+        // NPE: https://play.google.com/apps/publish/?account=7432842166583459741#AndroidMetricsErrorsPlace:p=t5mm.brownbagguide.info.extra&appid=4973782118037346501&appVersion&lastReportedRange=LAST_60_DAYS&clusterName=apps/t5mm.brownbagguide.info.extra/clusters/cba09888&detailsAppVersion
+        if (hitsEntities == null)
+            return videos;
+
+        for (HitSourceEntity video : hitsEntities) {
+
+            // add the video to the list
+            videos.add(convert(video.getVideo().getBody()));
         }
 
         return videos;
