@@ -21,6 +21,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,6 +75,7 @@ public class MainFragment extends FragmentEx {
 
 	public static final String SHOULD_SELECTED_FEED_TAB = "MainFragment.SHOULD_SELECTED_FEED_TAB";
 
+	private AdView mAdView;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -168,9 +174,34 @@ public class MainFragment extends FragmentEx {
 		// refresh dialog from showing when an automatic refresh happens.
 		videoGridFragmentsList.get(viewPager.getCurrentItem()).onFragmentSelected();
 
+		// load banner ad
+		initializeGoogleAdMob();
+		loadAdView(view);
+
 		return view;
 	}
 
+	/**
+	 * initializes the admob library with the admob App ID
+	 */
+	private void initializeGoogleAdMob() {
+
+		MobileAds.initialize(getContext(), "ca-app-pub-9258673963588821~1256325557");
+	}
+
+	/**
+	 * loads an ad unit
+	 *
+	 * @param view
+	 */
+	private void loadAdView(View view) {
+
+		mAdView = view.findViewById(R.id.adView);
+		AdRequest adRequest = new AdRequest.Builder()
+//				.addTestDevice("213208C863404A6829AF8EDFE1EF48DA")
+				.build();
+		mAdView.loadAd(adRequest);
+	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
