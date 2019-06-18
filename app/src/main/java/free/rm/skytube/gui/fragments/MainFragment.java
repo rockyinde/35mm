@@ -198,7 +198,7 @@ public class MainFragment extends FragmentEx {
 
 		mAdView = view.findViewById(R.id.adView);
 		AdRequest adRequest = new AdRequest.Builder()
-				.addTestDevice("213208C863404A6829AF8EDFE1EF48DA")
+//				.addTestDevice("213208C863404A6829AF8EDFE1EF48DA")
 				.build();
 		mAdView.loadAd(adRequest);
 	}
