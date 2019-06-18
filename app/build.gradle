@@ -10,8 +10,8 @@ android {
         minSdkVersion 15
         targetSdkVersion 27
 
-        versionName "1.07"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 8         // video cell bottom text alignment
+        versionName "1.09"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 10         // video cell bottom text alignment
 
         // Third party devs:  pls be ethical and change the below keys
         buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4"'
@@ -118,4 +118,7 @@ dependencies {
     implementation 'com.amazonaws:aws-android-sdk-appsync:2.6.+'
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0'
     implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
+
+    /*** AD MOB ***/
+    implementation 'com.google.android.gms:play-services-ads:17.2.1'
 }

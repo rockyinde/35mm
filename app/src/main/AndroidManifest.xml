@@ -89,6 +89,10 @@
 			android:name=".gui.activities.PermissionsActivity"
 		    android:theme="@style/TransparentActivity">
 		</activity>
+
+		<meta-data
+			android:name="com.google.android.gms.ads.APPLICATION_ID"
+			android:value="ca-app-pub-9258673963588821~1256325557"/>
 	</application>
 
 </manifest>
