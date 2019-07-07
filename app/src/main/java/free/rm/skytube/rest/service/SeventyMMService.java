@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface SeventyMMService {
 
-    @POST("fetch")
+    @POST("videos")
     Call<MMSFetchVideosResponse> getVideos (@Body MMSFetchVideosRequest request);
 
     @POST("save")

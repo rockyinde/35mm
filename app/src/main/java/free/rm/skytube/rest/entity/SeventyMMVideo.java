@@ -1,6 +1,5 @@
 package free.rm.skytube.rest.entity;
 
-import free.rm.skytube.businessobjects.YouTube.POJOs.YouTubeVideo;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +9,6 @@ public class SeventyMMVideo {
 
     private String id;
     private String cat;
-    private YouTubeVideo body;
+    private String body;
     private String title;
 }

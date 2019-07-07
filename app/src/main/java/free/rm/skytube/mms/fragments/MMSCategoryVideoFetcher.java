@@ -52,7 +52,7 @@ public class MMSCategoryVideoFetcher extends GetYouTubeVideos {
                 noMoreVideoPages = true;
 
             searchResultList = MMSEntityMapperUtility.convert(response.getItems());
-//            shuffle(searchResultList);
+            shuffle(searchResultList);
         } else {
 
             searchResultList = new ArrayList<>();

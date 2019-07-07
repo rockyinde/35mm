@@ -408,8 +408,6 @@ public class YouTubeVideo implements Serializable {
 	 * Gets the {@link #publishDate} as a pretty string.
 	 */
 	public String getPublishDatePretty() {
-
-		forceRefreshPublishDatePretty();
 		return publishDatePretty;
 	}
 

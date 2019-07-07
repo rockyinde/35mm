@@ -8,5 +8,4 @@ import lombok.Setter;
 public class MMSPageToken {
 
     private String cat, id;
-    private long pdate;
 }
