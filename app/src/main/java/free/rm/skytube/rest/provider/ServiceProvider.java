@@ -33,7 +33,7 @@ public class ServiceProvider {
         return SEVENTY_MM_SERVICE;
     }
 
-    public static void asyncSave (final String id, final String cat, final String body, final String title) {
+    public static void asyncSave (final String id, final String cat, final YouTubeVideo body, final String title) {
 
         new Thread(new Runnable(){
             @Override
@@ -93,7 +93,7 @@ public class ServiceProvider {
         }
     }
 
-    public static SeventyMMVideo save (String id, String cat, String body, String title) {
+    public static SeventyMMVideo save (String id, String cat, YouTubeVideo body, String title) {
 
         SeventyMMVideo video = new SeventyMMVideo();
         video.setId(id);
@@ -117,7 +117,7 @@ public class ServiceProvider {
     private static void testSave () throws IOException {
 
 
-        SeventyMMVideo resVideo = save("test", "test", "test", "test");
+        SeventyMMVideo resVideo = save("test", "test", null, "test");
 
         System.out.println(resVideo.getId());
     }

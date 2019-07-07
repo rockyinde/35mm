@@ -29,7 +29,8 @@ public class MMSEntityMapperUtility {
         for (SeventyMMVideo video : mmsVideos) {
 
             // add the video to the list
-            videos.add(convert(video.getBody()));
+//            videos.add(convert(video.getBody()));
+            videos.add((video.getBody()));
         }
 
         return videos;
@@ -46,7 +47,8 @@ public class MMSEntityMapperUtility {
         for (HitSourceEntity video : hitsEntities) {
 
             // add the video to the list
-            videos.add(convert(video.getVideo().getBody()));
+            videos.add((video.getVideo().getBody()));
+//            videos.add(convert(video.getVideo().getBody()));
         }
 
         return videos;
