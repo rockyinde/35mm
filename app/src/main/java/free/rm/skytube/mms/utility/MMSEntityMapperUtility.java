@@ -23,12 +23,13 @@ public class MMSEntityMapperUtility {
         for (SeventyMMVideo video : mmsVideos) {
 
             // add the video to the list
-            videos.add(convert(video.getBody()));
+//            videos.add(convert(video.getBody()));
+            videos.add((video.getBody()));
         }
 
         return videos;
     }
-
+    
     private static YouTubeVideo convert (String json) {
 
         // convert JSON into YouTubeVideo
