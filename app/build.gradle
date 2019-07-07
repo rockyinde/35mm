@@ -10,17 +10,9 @@ android {
         minSdkVersion 15
         targetSdkVersion 27
 
-        versionName "1.09"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 10         // video cell bottom text alignment
+        versionName "1.10"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 11         // video cell bottom text alignment
 
-        // Third party devs:  pls be ethical and change the below keys
-        buildConfigField 'String',   'YOUTUBE_API_KEYS_DEBUG', '"AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4"'
-        buildConfigField 'String[]', 'YOUTUBE_API_KEYS',
-                '{' +
-                        '"AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4",' +
-                        '"AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4",' +
-                        '"AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4"'  +
-                '}'
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://brownbagguide.info/"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://brownbagguide.info/"'
         buildConfigField 'String', 'SKYTUBE_UPDATES_URL', '"https://api.github.com/repos/ram-on/SkyTube/releases/latest"'

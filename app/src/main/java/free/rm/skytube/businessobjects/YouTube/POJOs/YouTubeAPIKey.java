@@ -36,6 +36,8 @@ public class YouTubeAPIKey {
 
 	private static YouTubeAPIKey youTubeAPIKey = null;
 
+	private static String[] YOUTUBE_API_KEYS = {"AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4"};
+
 
 	/**
 	 * Constructor.  Will retrieve user's YouTube API key if set.
@@ -69,11 +71,11 @@ public class YouTubeAPIKey {
 			key = userAPIKey;
 		} else {
 			if (BuildConfig.DEBUG) {
-				key = BuildConfig.YOUTUBE_API_KEYS_DEBUG;
+				key = "AIzaSyCKfhAgUThXhv7r6k0XKCyk3r3ckO9-7G4";
 			} else {
 				// else we are going to choose one of the defaults keys at random
-				int i = random.nextInt(BuildConfig.YOUTUBE_API_KEYS.length);
-				key = BuildConfig.YOUTUBE_API_KEYS[i];
+				int i = random.nextInt(YOUTUBE_API_KEYS.length);
+				key = YOUTUBE_API_KEYS[i];
 			}
 		}
 
