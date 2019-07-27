@@ -47,7 +47,7 @@ public class MMSEntityMapperUtility {
         for (HitSourceEntity video : hitsEntities) {
 
             // add the video to the list
-            videos.add((video.getVideo().getBody()));
+            videos.add(convert(video.getVideo().getBody()));
 //            videos.add(convert(video.getVideo().getBody()));
         }
 

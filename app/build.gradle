@@ -10,8 +10,8 @@ android {
         minSdkVersion 15
         targetSdkVersion 27
 
-        versionName "1.10"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 11         // video cell bottom text alignment
+        versionName "1.12"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 13         // video cell bottom text alignment
 
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://brownbagguide.info/"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://brownbagguide.info/"'
