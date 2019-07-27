@@ -29,7 +29,7 @@ public class MMSEntityMapperUtility {
 
         return videos;
     }
-    
+
     private static YouTubeVideo convert (String json) {
 
         // convert JSON into YouTubeVideo

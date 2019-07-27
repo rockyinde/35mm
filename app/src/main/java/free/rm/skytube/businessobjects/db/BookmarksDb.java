@@ -112,7 +112,7 @@ public class BookmarksDb extends SQLiteOpenHelperEx implements OrderableDatabase
 		onUpdated();
 
 		// add to cloud
-        ServiceProvider.asyncSave(id, cat, body, title);
+        ServiceProvider.asyncSave(id, cat, video, title);
 
 		return addSuccessful;
 	}
