@@ -17,6 +17,8 @@
 
 package free.rm.skytube.businessobjects.YouTube;
 
+import com.google.gson.JsonObject;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -32,7 +34,7 @@ import free.rm.skytube.rest.entity.MMSPageToken;
 public abstract class GetYouTubeVideos {
 	protected String nextPageToken = null;
 	protected boolean noMoreVideoPages = false;
-	protected MMSPageToken mmsPageToken = null;
+	protected JsonObject mmsPageToken = null;
 
 	/**
 	 * Initialise this object.

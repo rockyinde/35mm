@@ -1,5 +1,8 @@
 package free.rm.skytube.rest.entity;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,5 +11,5 @@ import lombok.Setter;
 public class MMSFetchVideosRequest {
 
     private String c;   // cat
-    private MMSPageToken pt;
+    private JsonObject pt;
 }

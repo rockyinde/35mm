@@ -2,6 +2,8 @@ package free.rm.skytube.rest.provider;
 
 import android.util.Log;
 
+import com.google.gson.JsonObject;
+
 import java.io.IOException;
 import java.time.Clock;
 import java.util.List;
@@ -87,7 +89,7 @@ public class ServiceProvider {
      * @param pt
      * @return
      */
-    public static MMSFetchVideosResponse search (String query, MMSPageToken pt) {
+    public static MMSFetchVideosResponse search (String query, JsonObject pt) {
 
         MMSSearchRequest request = new MMSSearchRequest();
         request.setQ(query);
@@ -108,7 +110,7 @@ public class ServiceProvider {
         }
     }
 
-    public static MMSFetchVideosResponse fetchVideos (String cat, MMSPageToken pt) {
+    public static MMSFetchVideosResponse fetchVideos (String cat, JsonObject pt) {
 
         MMSFetchVideosRequest request = new MMSFetchVideosRequest();
         request.setC(cat);

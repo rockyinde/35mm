@@ -1,5 +1,7 @@
 package free.rm.skytube.rest.entity;
 
+import com.google.gson.JsonObject;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,5 +10,5 @@ import lombok.Setter;
 public class MMSSearchRequest {
 
     private String q;   // query
-    private MMSPageToken pt;
+    private JsonObject pt;
 }

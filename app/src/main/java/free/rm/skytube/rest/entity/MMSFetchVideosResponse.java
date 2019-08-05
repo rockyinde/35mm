@@ -1,5 +1,8 @@
 package free.rm.skytube.rest.entity;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import java.util.List;
 
 import lombok.Getter;
@@ -12,5 +15,5 @@ public class MMSFetchVideosResponse {
     private List<SeventyMMVideo> Items;
     private int Count;
     private int ScannedCount;
-    private MMSPageToken LastEvaluatedKey;
+    private JsonObject LastEvaluatedKey;
 }
