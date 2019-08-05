@@ -2,16 +2,16 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.amazonaws.appsync'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "t5mm.brownbagguide.info"
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 28
 
-        versionName "1.12"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 13         // video cell bottom text alignment
+        versionName "1.14"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 15         // page token generalization
 
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://brownbagguide.info/"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://brownbagguide.info/"'
