@@ -55,7 +55,8 @@ public enum VideoCategory {
     HITS(10),
     COMEDY(11),
     PAST(12),
-	OLD(13);
+	OLD(13),
+	POPULAR(14);
 
 
 
@@ -104,6 +105,8 @@ public enum VideoCategory {
             return new MMSCategoryVideoFetcher("p");
         else if (id == OLD.id)
             return new MMSCategoryVideoFetcher("o");
+		else if (id == POPULAR.id)
+			return new MMSCategoryVideoFetcher("po");
 
 		// this will notify the developer that he forgot to edit this method when a new type is added
 		throw new UnsupportedOperationException();

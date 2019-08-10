@@ -1,18 +1,19 @@
-package free.rm.skytube.gui.fragments;
+package free.rm.skytube.gui.fragments.mms;
 
 import free.rm.skytube.R;
 import free.rm.skytube.app.SkyTubeApp;
 import free.rm.skytube.businessobjects.VideoCategory;
+import free.rm.skytube.gui.fragments.VideosGridFragment;
 
-public class MMSComedyFragment extends VideosGridFragment {
+public class MMSRecentFragment extends VideosGridFragment {
 
     @Override
     protected VideoCategory getVideoCategory() {
-        return VideoCategory.COMEDY;
+        return VideoCategory.RECENT;
     }
 
     @Override
     public String getFragmentName() {
-        return SkyTubeApp.getStr(R.string.comedy);
+        return SkyTubeApp.getStr(R.string.recent);
     }
 }

@@ -13,7 +13,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
@@ -33,9 +31,14 @@ import free.rm.skytube.R;
 import free.rm.skytube.businessobjects.Logger;
 import free.rm.skytube.businessobjects.db.BookmarksDb;
 import free.rm.skytube.businessobjects.db.DownloadedVideosDb;
-import free.rm.skytube.gui.businessobjects.MainActivityListener;
 import free.rm.skytube.gui.businessobjects.adapters.SubsAdapter;
 import free.rm.skytube.gui.businessobjects.fragments.FragmentEx;
+import free.rm.skytube.gui.fragments.mms.MMSComedyFragment;
+import free.rm.skytube.gui.fragments.mms.MMSHitsFragment;
+import free.rm.skytube.gui.fragments.mms.MMSOldFragment;
+import free.rm.skytube.gui.fragments.mms.MMSPastFragment;
+import free.rm.skytube.gui.fragments.mms.MMSPopularFragment;
+import free.rm.skytube.gui.fragments.mms.MMSRecentFragment;
 
 public class MainFragment extends FragmentEx {
 
@@ -48,11 +51,14 @@ public class MainFragment extends FragmentEx {
 	/** List of fragments that will be displayed as tabs. */
 	private List<VideosGridFragment>	videoGridFragmentsList = new ArrayList<>();
 	private FeaturedVideosFragment		featuredVideosFragment = null;
-	private MMSRecentFragment 			recentFragment = null;
-	private MMSHitsFragment 			hitsFragment = null;
-	private MMSComedyFragment 			comedyFragment = null;
-	private MMSPastFragment 			pastFragment = null;
-	private MMSOldFragment 				oldFragment = null;
+
+	private MMSRecentFragment recentFragment = null;
+	private MMSHitsFragment hitsFragment = null;
+	private MMSComedyFragment comedyFragment = null;
+	private MMSPastFragment pastFragment = null;
+	private MMSOldFragment oldFragment = null;
+	private MMSPopularFragment popularFragment = null;
+
 	private MostPopularVideosFragment	mostPopularVideosFragment = null;
 	private SubscriptionsFeedFragment   subscriptionsFeedFragment = null;
 	private BookmarksFragment			bookmarksFragment = null;
@@ -60,11 +66,14 @@ public class MainFragment extends FragmentEx {
 
 	// Constants for saving the state of this Fragment's child Fragments
 	public static final String FEATURED_VIDEOS_FRAGMENT = "MainFragment.featuredVideosFragment";
+
 	public static final String RECENT_FRAGMENT = "MainFragment.recentFragment";
 	public static final String HITS_FRAGMENT = "MainFragment.hitsFragment";
 	public static final String COMEDY_FRAGMENT = "MainFragment.comedyFragment";
 	public static final String PAST_FRAGMENT = "MainFragment.pastFragment";
 	public static final String OLD_FRAGMENT = "MainFragment.oldFragment";
+	public static final String POPULAR_FRAGMENT = "MainFragment.popularFragment";
+
 	public static final String MOST_POPULAR_VIDEOS_FRAGMENT = "MainFragment.mostPopularVideosFragment";
 	public static final String SUBSCRIPTIONS_FEED_FRAGMENT = "MainFragment.subscriptionsFeedFragment";
 	public static final String BOOKMARKS_FRAGMENT = "MainFragment.bookmarksFragment";
@@ -83,11 +92,14 @@ public class MainFragment extends FragmentEx {
 
 		if(savedInstanceState != null) {
 			featuredVideosFragment = (FeaturedVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, FEATURED_VIDEOS_FRAGMENT);
+
 			recentFragment = (MMSRecentFragment) getChildFragmentManager().getFragment(savedInstanceState, RECENT_FRAGMENT);
 			hitsFragment = (MMSHitsFragment) getChildFragmentManager().getFragment(savedInstanceState, HITS_FRAGMENT);
 			comedyFragment = (MMSComedyFragment) getChildFragmentManager().getFragment(savedInstanceState, COMEDY_FRAGMENT);
 			pastFragment = (MMSPastFragment) getChildFragmentManager().getFragment(savedInstanceState, PAST_FRAGMENT);
 			oldFragment = (MMSOldFragment) getChildFragmentManager().getFragment(savedInstanceState, OLD_FRAGMENT);
+			popularFragment = (MMSPopularFragment) getChildFragmentManager().getFragment(savedInstanceState, POPULAR_FRAGMENT);
+
 			mostPopularVideosFragment = (MostPopularVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, MOST_POPULAR_VIDEOS_FRAGMENT);
 			subscriptionsFeedFragment = (SubscriptionsFeedFragment)getChildFragmentManager().getFragment(savedInstanceState, SUBSCRIPTIONS_FEED_FRAGMENT);
 			bookmarksFragment = (BookmarksFragment) getChildFragmentManager().getFragment(savedInstanceState, BOOKMARKS_FRAGMENT);
@@ -261,6 +273,9 @@ public class MainFragment extends FragmentEx {
 			if (oldFragment == null)
 				oldFragment = new MMSOldFragment();
 
+			if (popularFragment == null)
+				popularFragment = new MMSPopularFragment();
+
 			if (mostPopularVideosFragment == null)
 				mostPopularVideosFragment = new MostPopularVideosFragment();
 
@@ -282,6 +297,7 @@ public class MainFragment extends FragmentEx {
 //			videoGridFragmentsList.add(featuredVideosFragment);
 			videoGridFragmentsList.add(recentFragment);
 			videoGridFragmentsList.add(hitsFragment);
+			videoGridFragmentsList.add(popularFragment);
 			videoGridFragmentsList.add(comedyFragment);
 			videoGridFragmentsList.add(pastFragment);
 			videoGridFragmentsList.add(oldFragment);
@@ -310,8 +326,9 @@ public class MainFragment extends FragmentEx {
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		if(featuredVideosFragment != null && featuredVideosFragment.isAdded())
-			getChildFragmentManager().putFragment(outState, FEATURED_VIDEOS_FRAGMENT, featuredVideosFragment);
+//		if(featuredVideosFragment != null && featuredVideosFragment.isAdded())
+//			getChildFragmentManager().putFragment(outState, FEATURED_VIDEOS_FRAGMENT, featuredVideosFragment);
+
 		if(recentFragment != null && recentFragment.isAdded())
 			getChildFragmentManager().putFragment(outState, RECENT_FRAGMENT, recentFragment);
 		if(hitsFragment != null && hitsFragment.isAdded())
@@ -322,7 +339,10 @@ public class MainFragment extends FragmentEx {
 			getChildFragmentManager().putFragment(outState, PAST_FRAGMENT, pastFragment);
 		if(oldFragment != null && oldFragment.isAdded())
 			getChildFragmentManager().putFragment(outState, OLD_FRAGMENT, oldFragment);
-//		if(mostPopularVideosFragment != null && mostPopularVideosFragment.isAdded())
+        if(popularFragment != null && popularFragment.isAdded())
+            getChildFragmentManager().putFragment(outState, POPULAR_FRAGMENT, popularFragment);
+
+		//		if(mostPopularVideosFragment != null && mostPopularVideosFragment.isAdded())
 //			getChildFragmentManager().putFragment(outState, MOST_POPULAR_VIDEOS_FRAGMENT, mostPopularVideosFragment);
 //		if(subscriptionsFeedFragment != null && subscriptionsFeedFragment.isAdded())
 //			getChildFragmentManager().putFragment(outState, SUBSCRIPTIONS_FEED_FRAGMENT, subscriptionsFeedFragment);
