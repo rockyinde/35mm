@@ -6,12 +6,12 @@ android {
     buildToolsVersion '27.0.3'
 
     defaultConfig {
-        applicationId "t5mm.brownbagguide.info"
+        applicationId "dub.brownbagguide.info"
         minSdkVersion 15
         targetSdkVersion 28
 
-        versionName "1.15"    // digits of the *fractional part* shall NOT be > than "9"
-        versionCode 16         // page token generalization
+        versionName "1.00"    // digits of the *fractional part* shall NOT be > than "9"
+        versionCode 1         // page token generalization
 
         buildConfigField 'String', 'SKYTUBE_WEBSITE',         '"http://brownbagguide.info/"'
         buildConfigField 'String', 'SKYTUBE_WEBSITE_CREDITS', '"http://brownbagguide.info/"'
@@ -25,11 +25,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    flavorDimensions "t5mm"
+    flavorDimensions "dub"
     productFlavors {
         // 100% Open-Source Edition
         oss {
-            applicationId "t5mm.brownbagguide.info.oss"
+            applicationId "dub.brownbagguide.info.oss"
             resValue "string", "app_name", "47mm"
             dimension "t5mm"
         }
