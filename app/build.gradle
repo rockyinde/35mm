@@ -30,14 +30,14 @@ android {
         // 100% Open-Source Edition
         oss {
             applicationId "dub.brownbagguide.info.oss"
-            resValue "string", "app_name", "47mm"
-            dimension "t5mm"
+            resValue "string", "app_name", "Dubwood"
+            dimension "dub"
         }
         // 99% Open-source edition:  uses the YouTube Player Jar [i.e. proprietary module - optional usage]
         extra {
-            applicationId "t5mm.brownbagguide.info.extra"
-            resValue "string", "app_name", "47mm"
-            dimension "t5mm"
+            applicationId "dub.brownbagguide.info.extra"
+            resValue "string", "app_name", "Dubwood"
+            dimension "dub"
         }
     }
     // Generate APK filenames as follows:  <App Name>-<Flavor><Version>

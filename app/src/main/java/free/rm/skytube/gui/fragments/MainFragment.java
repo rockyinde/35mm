@@ -65,19 +65,10 @@ public class MainFragment extends FragmentEx {
 	private DownloadedVideosFragment    downloadedVideosFragment = null;
 
 	// Constants for saving the state of this Fragment's child Fragments
-	public static final String FEATURED_VIDEOS_FRAGMENT = "MainFragment.featuredVideosFragment";
-
 	public static final String RECENT_FRAGMENT = "MainFragment.recentFragment";
 	public static final String HITS_FRAGMENT = "MainFragment.hitsFragment";
-	public static final String COMEDY_FRAGMENT = "MainFragment.comedyFragment";
-	public static final String PAST_FRAGMENT = "MainFragment.pastFragment";
-	public static final String OLD_FRAGMENT = "MainFragment.oldFragment";
 	public static final String POPULAR_FRAGMENT = "MainFragment.popularFragment";
-
-	public static final String MOST_POPULAR_VIDEOS_FRAGMENT = "MainFragment.mostPopularVideosFragment";
-	public static final String SUBSCRIPTIONS_FEED_FRAGMENT = "MainFragment.subscriptionsFeedFragment";
 	public static final String BOOKMARKS_FRAGMENT = "MainFragment.bookmarksFragment";
-	public static final String DOWNLOADED_VIDEOS_FRAGMENT = "MainFragment.downloadedVideosFragment";
 
 	private VideosPagerAdapter			videosPagerAdapter = null;
 	private ViewPager					viewPager;
@@ -91,19 +82,11 @@ public class MainFragment extends FragmentEx {
 		super.onCreate(savedInstanceState);
 
 		if(savedInstanceState != null) {
-			featuredVideosFragment = (FeaturedVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, FEATURED_VIDEOS_FRAGMENT);
 
 			recentFragment = (MMSRecentFragment) getChildFragmentManager().getFragment(savedInstanceState, RECENT_FRAGMENT);
 			hitsFragment = (MMSHitsFragment) getChildFragmentManager().getFragment(savedInstanceState, HITS_FRAGMENT);
-			comedyFragment = (MMSComedyFragment) getChildFragmentManager().getFragment(savedInstanceState, COMEDY_FRAGMENT);
-			pastFragment = (MMSPastFragment) getChildFragmentManager().getFragment(savedInstanceState, PAST_FRAGMENT);
-			oldFragment = (MMSOldFragment) getChildFragmentManager().getFragment(savedInstanceState, OLD_FRAGMENT);
 			popularFragment = (MMSPopularFragment) getChildFragmentManager().getFragment(savedInstanceState, POPULAR_FRAGMENT);
-
-			mostPopularVideosFragment = (MostPopularVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, MOST_POPULAR_VIDEOS_FRAGMENT);
-			subscriptionsFeedFragment = (SubscriptionsFeedFragment)getChildFragmentManager().getFragment(savedInstanceState, SUBSCRIPTIONS_FEED_FRAGMENT);
 			bookmarksFragment = (BookmarksFragment) getChildFragmentManager().getFragment(savedInstanceState, BOOKMARKS_FRAGMENT);
-			downloadedVideosFragment = (DownloadedVideosFragment) getChildFragmentManager().getFragment(savedInstanceState, DOWNLOADED_VIDEOS_FRAGMENT);
 		}
 	}
 
@@ -133,17 +116,6 @@ public class MainFragment extends FragmentEx {
 			actionBar.setDisplayHomeAsUpEnabled(true);
 			actionBar.setHomeButtonEnabled(true);
 		}
-
-//		subsListView = view.findViewById(R.id.subs_drawer);
-//		if (subsAdapter == null) {
-//			subsAdapter = SubsAdapter.get(getActivity(), view.findViewById(R.id.subs_drawer_progress_bar));
-//		} else {
-//			subsAdapter.setContext(getActivity());
-//		}
-//		subsAdapter.setListener((MainActivityListener)getActivity());
-//
-//		subsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//		subsListView.setAdapter(subsAdapter);
 
 		videosPagerAdapter = new VideosPagerAdapter(getChildFragmentManager());
 		viewPager = view.findViewById(R.id.pager);
@@ -264,47 +236,20 @@ public class MainFragment extends FragmentEx {
 			if (hitsFragment == null)
 				hitsFragment = new MMSHitsFragment();
 
-			if (comedyFragment == null)
-				comedyFragment = new MMSComedyFragment();
-
-			if (pastFragment == null)
-				pastFragment = new MMSPastFragment();
-
-			if (oldFragment == null)
-				oldFragment = new MMSOldFragment();
-
 			if (popularFragment == null)
 				popularFragment = new MMSPopularFragment();
-
-			if (mostPopularVideosFragment == null)
-				mostPopularVideosFragment = new MostPopularVideosFragment();
-
-			if (subscriptionsFeedFragment == null)
-				subscriptionsFeedFragment = new SubscriptionsFeedFragment();
 
 			if (bookmarksFragment == null) {
 				bookmarksFragment = new BookmarksFragment();
 				BookmarksDb.getBookmarksDb().addListener(bookmarksFragment);
 			}
 
-			if(downloadedVideosFragment == null) {
-				downloadedVideosFragment = new DownloadedVideosFragment();
-				DownloadedVideosDb.getVideoDownloadsDb().setListener(downloadedVideosFragment);
-			}
-
 			// add fragments to list:  do NOT forget to ***UPDATE*** @string/default_tab and @string/default_tab_values
 			videoGridFragmentsList.clear();
-//			videoGridFragmentsList.add(featuredVideosFragment);
 			videoGridFragmentsList.add(recentFragment);
 			videoGridFragmentsList.add(hitsFragment);
 			videoGridFragmentsList.add(popularFragment);
-			videoGridFragmentsList.add(comedyFragment);
-			videoGridFragmentsList.add(pastFragment);
-			videoGridFragmentsList.add(oldFragment);
-//			videoGridFragmentsList.add(mostPopularVideosFragment);
-//			videoGridFragmentsList.add(subscriptionsFeedFragment);
 			videoGridFragmentsList.add(bookmarksFragment);
-//			videoGridFragmentsList.add(downloadedVideosFragment);
 		}
 
 		@Override
@@ -326,30 +271,15 @@ public class MainFragment extends FragmentEx {
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-//		if(featuredVideosFragment != null && featuredVideosFragment.isAdded())
-//			getChildFragmentManager().putFragment(outState, FEATURED_VIDEOS_FRAGMENT, featuredVideosFragment);
 
 		if(recentFragment != null && recentFragment.isAdded())
 			getChildFragmentManager().putFragment(outState, RECENT_FRAGMENT, recentFragment);
 		if(hitsFragment != null && hitsFragment.isAdded())
 			getChildFragmentManager().putFragment(outState, HITS_FRAGMENT, hitsFragment);
-		if(comedyFragment != null && comedyFragment.isAdded())
-			getChildFragmentManager().putFragment(outState, COMEDY_FRAGMENT, comedyFragment);
-		if(pastFragment != null && pastFragment.isAdded())
-			getChildFragmentManager().putFragment(outState, PAST_FRAGMENT, pastFragment);
-		if(oldFragment != null && oldFragment.isAdded())
-			getChildFragmentManager().putFragment(outState, OLD_FRAGMENT, oldFragment);
         if(popularFragment != null && popularFragment.isAdded())
             getChildFragmentManager().putFragment(outState, POPULAR_FRAGMENT, popularFragment);
-
-		//		if(mostPopularVideosFragment != null && mostPopularVideosFragment.isAdded())
-//			getChildFragmentManager().putFragment(outState, MOST_POPULAR_VIDEOS_FRAGMENT, mostPopularVideosFragment);
-//		if(subscriptionsFeedFragment != null && subscriptionsFeedFragment.isAdded())
-//			getChildFragmentManager().putFragment(outState, SUBSCRIPTIONS_FEED_FRAGMENT, subscriptionsFeedFragment);
 		if(bookmarksFragment != null && bookmarksFragment.isAdded())
 			getChildFragmentManager().putFragment(outState, BOOKMARKS_FRAGMENT, bookmarksFragment);
-//		if(downloadedVideosFragment != null && downloadedVideosFragment.isAdded())
-//			getChildFragmentManager().putFragment(outState, DOWNLOADED_VIDEOS_FRAGMENT, downloadedVideosFragment);
 
 		super.onSaveInstanceState(outState);
 	}
